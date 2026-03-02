@@ -3,6 +3,7 @@
 
 ### Added
 - readme.txt
+- write to notice file
 
 ### Changed
 
