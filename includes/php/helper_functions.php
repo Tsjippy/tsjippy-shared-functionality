@@ -373,16 +373,16 @@ function printArray($message, $display=false, $printFunctionHiearchy=false, $err
 	$bt		= debug_backtrace();
 
 	if($error){
-		$type 			= 3;
-		$destination	= WP_CONTENT_DIR.'notice.log';
-	}else{
 		$type 			= 0;
 		$destination 	= null;
+	}else{
+		$type 			= 3;
+		$destination	= WP_CONTENT_DIR.'/notice.log';
 	}
 
 	if($printFunctionHiearchy){
 		error_log("Called from:", $type, $destination);
-		foreach($bt as $index=>$trace){
+		foreach($bt as $index => $trace){
 			// stop if we have reached the max depth
 			if(is_numeric($printFunctionHiearchy) && $index == $printFunctionHiearchy){
 				break;
@@ -390,23 +390,23 @@ function printArray($message, $display=false, $printFunctionHiearchy=false, $err
 			
 			$path	= str_replace(MODULESPATH, '', $trace['file']);
 
-			error_log($index, $type, $destination);
-			error_log( "    File: $path", $type, $destination);
-			error_log( "    Line {$trace['line']}", $type, $destination);
-			error_log( "    Function: {$trace['function']}", $type, $destination);
-			error_log( "    Args:", $type, $destination);
+			error_log("$index\n", $type, $destination);
+			error_log( "    File: $path\n", $type, $destination);
+			error_log( "    Line {$trace['line']}\n", $type, $destination);
+			error_log( "    Function: {$trace['function']}\n", $type, $destination);
+			error_log( "    Args:\n", $type, $destination);
 			error_log(print_r($trace['args'], true), $type, $destination);
 		}
 	}else{
 		$caller = array_shift($bt);
 		$path	= str_replace(MODULESPATH, '', $caller['file']);
-		error_log("Called from file $path line {$caller['line']}", $type, $destination);
+		error_log("Called from file $path line {$caller['line']}\n", $type, $destination);
 	}
 
 	if(is_array($message) || is_object($message)){
 		error_log(print_r($message, true), $type, $destination);
 	}else{
-		error_log(gmdate(DATEFORMAT.' '.TIMEFORMAT, time()).' - '.$message, $type, $destination);
+		error_log(gmdate(DATEFORMAT.' '.TIMEFORMAT, time()).' - '.$message."\n", $type, $destination);
 	}
 	
 	if($display){
