@@ -8,6 +8,7 @@
 ### Changed
 
 ### Fixed
+- notice log
 
 ### Updated
 
