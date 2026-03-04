@@ -2,15 +2,22 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
-- readme.txt
-- write to notice file
 
 ### Changed
 
 ### Fixed
-- notice log
 
 ### Updated
+
+## [6.0.6] - 2026-03-04
+
+
+### Added
+- readme.txt
+- write to notice file
+
+### Fixed
+- notice log
 
 ## [6.0.5] - 2026-01-28
 
