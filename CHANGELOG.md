@@ -4,6 +4,7 @@
 ### Added
 
 ### Changed
+- displaying admin menu messages
 
 ### Fixed
 
