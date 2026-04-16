@@ -8,6 +8,7 @@
 - code refactor
 
 ### Fixed
+- heartbeat issues
 
 ### Updated
 
