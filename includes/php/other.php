@@ -133,7 +133,7 @@ function init(){
 		update_option('sim_version', get_plugin_data(__FILE__)['Version']);
 	}
 
-	wp_deregister_script('heartbeat');
+	//wp_deregister_script('heartbeat');
 
 	// Make sure we have an active user when doing cron
 	if(wp_doing_cron()){
