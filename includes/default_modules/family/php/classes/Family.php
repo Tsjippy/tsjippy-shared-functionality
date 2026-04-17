@@ -71,10 +71,10 @@ class Family{
         if(is_object($userId)){
             $userId = $userId->ID;
         }
-        
-        return $wpdb->get_var(
-            $wpdb->prepare("select family_id from %i where user_id_1=%d OR user_id_2=%d LIMIT 1", $this->tableName, $userId, $userId)
-        );
+
+        $familyId = SIM\getFromDb("familyId-$userId", "select family_id from %i where user_id_1=%d OR user_id_2=%d LIMIT 1", $this->tableName, $userId, $userId);
+
+        return $familyId;
     }
 
     /**
@@ -104,12 +104,10 @@ class Family{
             $userId = $userId->ID;
         }
 
-        $results    = $wpdb->get_results(
-            $wpdb->prepare("select * from %i where user_id_1=%d or user_id_2=%d", $this->tableName, $userId, $userId)
-        );
+        $results = SIM\getFromDb("family-$userId", "select * from %i where user_id_1=%d or user_id_2=%d", $this->tableName, $userId, $userId);
 
-        if($wpdb->last_error !== ''){
-            return new \WP_Error('family', $wpdb->last_error);
+        if(is_wp_error($results)){
+            return $results;
         }
 
         $family = [];
@@ -164,13 +162,7 @@ class Family{
             $userId = $userId->ID;
         }
 
-        $results    = $wpdb->get_col(
-            $wpdb->prepare("select user_id_2 from %i where user_id_1=%d AND relationship='child'", $this->tableName, $userId)
-        );
-
-        if($wpdb->last_error !== ''){
-            return new \WP_Error('family', $wpdb->last_error);
-        }
+        $results = SIM\getFromDb("children-$userId", "select user_id_2 from %i where user_id_1=%d AND relationship='child'", $this->tableName, $userId);
 
         return $results;
     }
@@ -192,12 +184,10 @@ class Family{
         $siblings   = [];
 
         // Query all relations marked as siblings
-        $results   = $wpdb->get_results(
-            $wpdb->prepare("select * from %i where (user_id_1=%d OR user_id_2=%d) AND relationship='sibling'", $this->tableName, $userId, $userId)
-        );
+        $results    = SIM\getFromDb("siblings-$userId", "select * from %i where (user_id_1=%d OR user_id_2=%d) AND relationship='sibling'", $this->tableName, $userId, $userId);
 
-        if($wpdb->last_error !== ''){
-            return new \WP_Error('family', $wpdb->last_error);
+        if(is_wp_error($results)){
+            return $results;
         }
 
         foreach($results as $result){
@@ -210,12 +200,10 @@ class Family{
 
         // Get all the users with the same parent
         $subQuery   = $wpdb->prepare("select user_id_1 from %i where user_id_2=%d AND relationship='child' LIMIT 1", $this->tableName, $userId);
-        $results    = $wpdb->get_col(
-            $wpdb->prepare("select user_id_2 from %i where user_id_1=(%s) AND relationship='child'", $this->tableName, $subQuery)
-        );
+        $results    = SIM\getFromDb("siblings-$userId", "select user_id_2 from %i where user_id_1=(%s) AND relationship='child'", $this->tableName, $subQuery);
 
-        if($wpdb->last_error !== ''){
-            return new \WP_Error('family', $wpdb->last_error);
+        if(is_wp_error($results)){
+            return $results;
         }
 
         foreach($results as $userId){
@@ -250,15 +238,9 @@ class Family{
             $userId = $userId->ID;
         }
 
-        $results    = $wpdb->get_results(
-            $wpdb->prepare("select user_id_1 from %i where user_id_2=%d AND relationship='child'", $this->tableName, $userId)
-        );
+        $results    = SIM\getFromDb("parents-$userId", "select user_id_1 from %i where user_id_2=%d AND relationship='child'", $this->tableName, $userId);
 
-        if($wpdb->last_error !== ''){
-            return new \WP_Error('family', $wpdb->last_error);
-        }
-
-        if(empty($results)){
+        if(is_wp_error($results) || empty($results)){
             return $results;
         }
 
@@ -289,12 +271,10 @@ class Family{
             $userId = $userId->ID;
         }
 
-        $results    = $wpdb->get_results(
-            $wpdb->prepare("select * from %i where (user_id_1=%d OR user_id_2=%d) AND relationship='partner'", $this->tableName, $userId, $userId)
-        );
+        $results    = SIM\getFromDb("partner-$userId", "select * from %i where (user_id_1=%d OR user_id_2=%d) AND relationship='partner'", $this->tableName, $userId, $userId);
 
-        if($wpdb->last_error !== ''){
-            return new \WP_Error('family', $wpdb->last_error);
+        if(is_wp_error($results)){
+            return $results;
         }
 
         if(empty($results)){
@@ -345,14 +325,20 @@ class Family{
         }
 
         if(!empty($key)){
-            return $wpdb->get_var(
-                $wpdb->prepare("select value from %i where family_id=%d AND `key`=%s", $this->metaTableName, $this->getFamilyId($userId), $key)
-            );
+            $value    = SIM\getFromDb("$userId-$key", "select value from %i where family_id=%d AND `key`=%s", $this->metaTableName, $this->getFamilyId($userId), $key);
+
+            if(is_wp_error($value)){
+                return $value;
+            }
+
+            return $value;
         }
 
-        $results    = $wpdb->get_results(
-            $wpdb->prepare("select * from %i where family_id=%d", $this->metaTableName, $this->getFamilyId($userId))
-        );
+        $results    = SIM\getFromDb("$userId-familymetas", "select * from %i where family_id=%d", $this->metaTableName, $this->getFamilyId($userId));
+
+        if(is_wp_error($results)){
+            return $results;
+        }
 
         if(empty($results)){
             return null;

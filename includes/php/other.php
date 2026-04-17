@@ -158,25 +158,5 @@ function cleanOutput($response){
 	return $response;
 }
 
-// disable auto updates for this plugin on localhost
-add_filter( 'auto_update_plugin', __NAMESPACE__.'\disableAutoUpdate', 10, 2 );
-function disableAutoUpdate( $value, $item ) {
-    if ( 'tsjippy-shared-functionality' === $item->slug && ( $_SERVER['HTTP_HOST'] == 'localhost' || str_contains($_SERVER['HTTP_HOST'], '.local'))) {
-        return false; // disable auto-updates for the specified plugin
-    }
-
-    return $value; // Preserve auto-update status for other plugins
-}
-
 // only load needed block assets
 add_filter( 'should_load_separate_core_block_assets', '__return_true' );
-
-// Blocks are assumed to be in the plugins folder.
-// So adjust the urls for the ones in the sim-modules folder
-add_filter( 'plugins_url', __NAMESPACE__.'\fixBlockUrls', 10, 3);
-function fixBlockUrls($url, $path, $plugin ){
-	if(str_contains($url, MODULESPATH)){
-		$url	= pathToUrl(MODULESPATH.explode(MODULESPATH, $url)[1]);
-	}
-	return $url;
-}

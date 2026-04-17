@@ -345,6 +345,7 @@ function dataTab($moduleSlug, $moduleName, $settings, $tab, $message){
 	<div class='tabcontent <?php if($tab != 'data'){echo 'hidden';}?>' id='data'>
 		<?php
 		if(
+			!empty($_GET['main-tab']) &&
 			$_GET['main-tab']	== 'data'
 		){
 			echo $message;
@@ -375,6 +376,7 @@ function functionsTab($moduleSlug, $moduleName, $settings, $tab, $message){
 	<div class='tabcontent <?php if($tab != 'functions'){echo 'hidden';}?>' id='functions'>
 		<?php
 		if(
+			!empty($_GET['main-tab']) &&
 			$_GET['main-tab']	== 'functions'
 		){
 			echo $message;

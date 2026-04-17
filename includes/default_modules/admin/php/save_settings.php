@@ -58,20 +58,21 @@ function saveEmails(){
     if(
 		!isset($_POST['module']) ||
 		!isset($_POST['nonce']) ||
-		!wp_verify_nonce(wp_unslash($_POST['nonce']), 'module-settings' )
+        !isset($_POST['emails']) ||
+		!wp_verify_nonce($_POST['nonce'], 'module-settings' )
 	){
 		return '';
 	}
 
     $moduleSlug	    = sanitize_text_field($_POST['module']);
-    $options		= $_POST['emails'];
-    unset($options['module']);
+    $emailSettings	= $_POST['emails'];
+    unset($emailSettings['module']);
 
-    foreach($options as &$option){
-        $option = SIM\deslash($option);
+    foreach($emailSettings as &$emailSetting){
+        $emailSetting = SIM\deslash($emailSetting);
     }
 
-    $Modules[$moduleSlug]['emails']	= $options;
+    $Modules[$moduleSlug]['emails']	= $emailSettings;
 
     update_option('sim_modules', $Modules);
 }

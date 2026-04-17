@@ -137,7 +137,6 @@ function getUserAccounts($returnFamily=false, $adults=true, $fields=[], $extraAr
  * @return	string						The html
  */
 function userSelect($title, $onlyAdults=false, $families=false, $class='', $id='user-selection', $args=[], $userId='', $excludeIds=[1], $type='select', $listId='', $multiple=false){
-
 	wp_enqueue_script('sim_user_select_script');
 	$html = "";
 
@@ -146,7 +145,7 @@ function userSelect($title, $onlyAdults=false, $families=false, $class='', $id='
 		!empty($_GET["user-id"]) && 
 		is_numeric($_GET["user-id"])
 	){
-		$userId = $_GET["user-id"];
+		$userId = (int) $_GET["user-id"];
 	}
 	
 	//Get the id and the displayname of all users
@@ -275,7 +274,7 @@ function currentUrl($trim=false){
 		$url	 = trim(explode('?', $url)[0], "/");
 	}
 
-	return sanitize_url($url);
+	return sanitize_url(wp_unslash($url));
 }
 
 /**
@@ -361,129 +360,6 @@ function pathToUrl($path){
 	}
 	
 	return $url;
-}
-
-/**
- * Prints something to the log file and optional to the screen
- * @param 	string		$message	 			The message to be printed
- * @param	bool		$display				Whether to print the message to the screen or not
- * @param	bool|int	$printFunctionHiearchy	Whether to print the full backtrace, false for not printing, true for all, number for max depth
-*/
-function printArray($message, $display=false, $printFunctionHiearchy=false, $error=false){
-	$bt		= debug_backtrace();
-
-	if($error){
-		$type 			= 0;
-		$destination 	= null;
-	}else{
-		$type 			= 3;
-		$destination	= WP_CONTENT_DIR.'/notice.log';
-	}
-
-	if($printFunctionHiearchy){
-		error_log("Called from:", $type, $destination);
-		foreach($bt as $index => $trace){
-			// stop if we have reached the max depth
-			if(is_numeric($printFunctionHiearchy) && $index == $printFunctionHiearchy){
-				break;
-			}
-			
-			$path	= str_replace(MODULESPATH, '', $trace['file']);
-
-			error_log("$index\n", $type, $destination);
-			error_log( "    File: $path\n", $type, $destination);
-			error_log( "    Line {$trace['line']}\n", $type, $destination);
-			error_log( "    Function: {$trace['function']}\n", $type, $destination);
-			error_log( "    Args:\n", $type, $destination);
-			error_log(print_r($trace['args'], true), $type, $destination);
-		}
-	}else{
-		$caller = array_shift($bt);
-		$path	= str_replace(MODULESPATH, '', $caller['file']);
-		error_log("Called from file $path line {$caller['line']}\n", $type, $destination);
-	}
-
-	if(is_array($message) || is_object($message)){
-		error_log(print_r($message, true), $type, $destination);
-	}else{
-		error_log(gmdate(DATEFORMAT.' '.TIMEFORMAT, time()).' - '.$message."\n", $type, $destination);
-	}
-	
-	if($display){
-		?>
-		<pre>
-			Called from file <?php echo esc_html($caller['file']);?> line <?php echo esc_html($caller['line']);?>
-			<br>
-			<br>
-			<?php 
-			echo wp_kses_post(print_r($message));
-			?>
-		</pre>
-		<?php
-	}
-}
-
-/**
- * Prints html properly outlined for easy debugging
- */
-function printHtml($html){
-	$tabs	= 0;
-
-	// Split on the < symbol to get a list of opening and closing tags
-	$html		= explode('>', $html);
-	$newHtml	= '';
-
-	// loop over the elements
-	foreach($html as $index => $el){
-		$el = trim($el);
-
-		if(empty($el)){
-			continue;
-		}
-
-		// Split the line on a closing character </
-		$lines	= explode('</', $el);
-
-		if(!empty($lines[0])){
-			$newHtml	.= "\n";
-			
-			// write as many tabs as need
-			for ($x = 0; $x <= $tabs; $x++) {
-				$newHtml	.= "\t";
-			}
-
-			// then write the first element
-			$newHtml	.= $lines[0];
-		}
-
-		if(
-			substr($el, 0, 1) == '<' && 						// Element start with an opening symbol
-			substr($el, 0, 2) != '</' && 						// It does not start with a closing symbol
-			substr($el, 0, 6) != '<input' && 					// It does not start with <input (as that one does not have a closing />)
-			(
-				substr($el, 0, 7) != '<option' || 				// It does not start with <option (as that one does not have a closing />)
-				str_contains( $html[$index+1], '</option') 		// or the next element contains a closing option
-			) &&
-			$el != '<br'
-		){
-			$tabs++;
-		}
-		
-		if(isset($lines[1])){
-			$tabs--;
-
-			$newHtml	.= "\n";
-
-			for ($x = 0; $x <= $tabs; $x++) {
-				$newHtml	.= "\t";
-			}
-			$newHtml	.= '</'.$lines[1].'>';
-		}else{
-			$newHtml	.= '>';
-		}
-	}
-
-	printArray($newHtml);
 }
 
 /**
@@ -1366,137 +1242,9 @@ function urlUpdate($oldPath, $newPath){
 	}
 }
 
-/**
- * Search every table and column in the db
- *
- * @param	string	$search				the searchstring
- * @param	array	$excludedTables		the tables to exclude from the search
- * @param	array	$excludedColumns	the columns to exclude from the search
- *
- * @return	array						An array of results
- */
-function searchAllDB($search, $excludedTables=[], $excludedColumns=[]){
-    global $wpdb;
-
-    $out 	= [];
-
-    $tables	= $wpdb->get_results("show tables", ARRAY_N);
-    if(!empty($tables)){
-        foreach($tables as $table){
-			if(in_array($table[0], $excludedTables)){
-				continue;
-			}
-
-            $sqlSearchFields 	= [];
-            
-            $columns 			= $wpdb->get_results(
-				$wpdb->prepare("SHOW COLUMNS FROM %i", $table[0])
-			);
-            if(!empty($columns)){
-                foreach($columns as $column){
-					if(in_array($column->Field, $excludedColumns)){
-						continue;
-					}
-
-                    $sqlSearchFields[] = "`".$column->Field."` like('%".$wpdb->_real_escape($search)."%')";
-                }
-            }
-            $results		= $wpdb->get_results(
-				$wpdb->prepare("select * from %i where %s", $table[0], implode(" OR ", $sqlSearchFields))
-			);
-			if(!empty($results)){
-				foreach($results as $result){
-					foreach($result as $column=>$value){
-						if(in_array($column, $excludedColumns)){
-							continue;
-						}
-						if(str_contains($value, $search)){
-							$out[] 	= [
-								'table'		=> $table[0],
-								'column'	=> $column,
-								'value'		=> $value,
-							];
-						}
-					}
-				}
-			}
-        }
-    }
-
-	foreach($out as $index=>&$result){
-		$match	= false;
-		$value	= maybe_unserialize($result['value']);
-		if(is_array($value)){
-			$found	= arraySearchRecursive($search, $result);
-			if(!empty($found)){
-				$match	= true;
-				$result	= $found;
-			}
-		}elseif($value == $search){
-			$match	= true;
-		}
-
-		if(!$match){
-			unset($out[$index]);
-		}
-	}
-
-    return array_values($out);
-}
-
 //Creates subimages
 //Add action
 add_action('init', __NAMESPACE__.'\processImagesAction');
 function processImagesAction() {
 	add_action( 'process_images_action', __NAMESPACE__.'\processImages' );
-}
-
-/**
- * Temporary store a value
- *
- * @param   string  $key        The identifier
- * @param   string|int|array|object     $value  The value
- */
-function storeInTransient($key, $value){
-    if(!isset($_SESSION)){
-        session_start();
-    }
-    $_SESSION[$key] = $value;
-}
-
-/**
- * Retrieves a temporary stored value
- *
- * @param   string  $key    The key the values was stored with
- *
- * @return  mixed			The value or false if no value
- */
-function getFromTransient($key){
-    if(!isset($_SESSION)){
-        session_start();
-    }
-
-	if(!isset($_SESSION[$key])){
-		return false;
-	}
-
-    $value  = $_SESSION[$key]; 
-
-    return $value;
-}
-
-/**
- * Deletes a temporary stored value
- *
- * @param   string  $key    The key the values was stored with
- *
- * @return  string|int|array|object             The value
- */
-function deleteFromTransient($key){
-    if(!isset($_SESSION)){
-        session_start();
-    }
-    unset( $_SESSION[$key]);
-
-    session_write_close();
 }

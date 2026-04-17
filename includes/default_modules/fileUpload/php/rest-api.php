@@ -37,7 +37,7 @@ function removeDocument(){
         return false;
     }
 
-    $path = ABSPATH.wp_unslash(sanitize_url($_POST['url']));
+    $path = ABSPATH.sanitize_url(wp_unslash($_POST['url']));
 
     if(isset($_POST['user-id'])){
         $userId = (int) $_POST["user-id"];
@@ -52,7 +52,7 @@ function removeDocument(){
     
     //remove the file
     if(isset($_POST['libraryid']) && is_numeric($_POST['libraryid'])){
-        wp_delete_attachment($_POST['libraryid']);
+        wp_delete_attachment((int) $_POST['libraryid']);
     }else{
         wp_delete_file($path);
     }
