@@ -18,7 +18,7 @@ function customDescription( $res, $action, $args ) {
 	}
 
 	$github 	    		= new Github();
-	return $github->pluginData(SIM\PLUGIN_PATH, 'Tsjippy', 'sim-base', [
+	return $github->pluginData(SIM\PLUGIN_PATH, 'Tsjippy', 'tsjippy-shared-functionality', [
 		'active_installs'	=> 2, 
 		'donate_link'		=> 'harmseninnigeria.nl', 
 		'rating'			=> 5, 

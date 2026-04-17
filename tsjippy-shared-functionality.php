@@ -2,17 +2,17 @@
 namespace SIM;
 
 /**
- * Plugin Name:  		Base Functionality Needed for running SIM Modules
- * Description:  		A bundle of 33 modules to add AJAX login, forms and other functionality
+ * Plugin Name:  		Shared Functionality Used by Tsjippy Plugins
+ * Description:  		Shared functionality for a bundle of 34 plugins to add AJAX login, forms and other functionality
  * Version:      		6.0.6
  * Author:       		Ewald Harmsen
  * AuthorURI:			harmseninnigeria.nl
  * Requires at least:	6.3
  * Requires PHP: 		8.3
- * Tested up to: 		6.8.3
- * Plugin URI:			https://github.com/Tsjippy/sim-base/
- * Tested:				6.8.3	
- * TextDomain:			sim-base
+ * Tested up to: 		6.9.4
+ * Plugin URI:			https://github.com/Tsjippy/tsjippy-shared-functionality/
+ * Tested:				6.9.4	
+ * TextDomain:			tsjippy-shared-functionality
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *

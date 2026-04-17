@@ -5,7 +5,7 @@ namespace SIM;
 add_filter("plugin_action_links_".PLUGIN, __NAMESPACE__.'\addExtraPluginLinks', 10, 3);
 function addExtraPluginLinks($links, $plugin, $data) {
     // Settings Link
-    $slug           = 'sim-base';
+    $slug           = 'tsjippy-shared-functionality';
     $url            = admin_url( "admin.php?page=sim" );
     $link           = "<a href='$url'>Settings</a>";
     array_unshift($links, $link);
