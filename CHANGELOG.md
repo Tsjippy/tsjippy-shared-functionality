@@ -6,6 +6,7 @@
 ### Changed
 - displaying admin menu messages
 - code refactor
+- lib updates
 
 ### Fixed
 - heartbeat issues
