@@ -2,7 +2,7 @@
 namespace SIM;
 
 // Define constants
-define(__NAMESPACE__ .'\PLUGINNAME', 'sim-base');
+define(__NAMESPACE__ .'\PLUGINNAME', 'tsjippy-shared-functionality');
 define('SITEURL', site_url( '', 'https' ));
 define('SITEURLWITHOUTSCHEME', str_replace(['https://', 'http://'], '', SITEURL));
 define('SITENAME', get_bloginfo());

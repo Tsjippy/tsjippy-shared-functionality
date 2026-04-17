@@ -258,7 +258,7 @@ function currentUrl($trim=false){
 	if(defined('REST_REQUEST') && !empty($_SERVER['HTTP_REFERER'])){
 		$url		= $_SERVER['HTTP_REFERER'];
 	}else{
-		$protocol		= 'https';
+		$protocol= 'https';
 
 		if(!empty($_SERVER['REQUEST_SCHEME'])){
 			$protocol	= $_SERVER['REQUEST_SCHEME'];

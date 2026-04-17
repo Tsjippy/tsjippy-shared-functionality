@@ -14,7 +14,7 @@ function upgradeSucces( $upgraderObject, $options ) {
                 require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
                 // Define the path to the plugin's main file relative to wp-content/plugins/
-                $pluginPath = 'sim-base/sim-base.php';
+                $pluginPath = 'tsjippy-shared-functionality/tsjippy-shared-functionality.php';
 
                 // Check if the plugin is not already active
                 if ( ! is_plugin_active( $pluginPath ) ) {

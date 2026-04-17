@@ -41,15 +41,11 @@ function registerScripts($hook=''){
 	wp_register_script('smiley', plugins_url('js/smiley.min.js', __DIR__), array(), null, true);
 
 	//sortable library: https://github.com/SortableJS/Sortable#bs
-	wp_register_script('sortable', 'https://SortableJS.github.io/Sortable/Sortable.js', array(), STYLE_VERSION,true);
+	//wp_register_script('sortable', 'https://SortableJS.github.io/Sortable/Sortable.js', array(), STYLE_VERSION,true);
+	wp_register_script('sortable', plugins_url('js/sortable.min.js', __DIR__), array(), '1.15.6', true);
 	
 	//Sweet alert https://sweetalert2.github.io/
-	if($_SERVER['HTTP_HOST'] == 'localhost' || str_contains($_SERVER['HTTP_HOST'], '.local')) {
-		$url	= plugins_url('js/sweetalert.min.js', __DIR__);
-	}else{
-		$url	= '//cdn.jsdelivr.net/npm/sweetalert2@11';
-	}
-	wp_register_script('sweetalert', $url, array(), '11.1.4', true);
+	wp_register_script('sweetalert', plugins_url('js/sweetalert.min.js', __DIR__), array(), '11.4.18', true);
 
 	//add main.js
 	wp_register_script('sim_script', plugins_url('js/main.min.js', __DIR__), array( 'sweetalert'), STYLE_VERSION, true);

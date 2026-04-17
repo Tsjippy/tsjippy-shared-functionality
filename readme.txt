@@ -1,15 +1,15 @@
-=== sim-base ===
+=== tsjippy-shared-functionality ===
 Contributors: tsjippy
 Donate link: https://harmseninnigeria.nl
 Tags: base, family, signal, forms
 Requires at least: 6.3
-Tested up to: 6.8
+Tested up to: 6.9.4
 Stable tag: 6.0.4
 Requires PHP: 8.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Base plugin to add capabilities to wordpress with the use of other plugins that depend on this one.
+Shared plugin to add capabilities to wordpress with the use of other plugins that depend on this one.
 
 == Description ==
 
@@ -20,10 +20,10 @@ This is the base module with code all other sim plugins depend on.
 - [Captcha](https://github.com/Tsjippy/captcha)                         Add captcha or equivalent to forms
 - [Comments](https://github.com/Tsjippy/comments)                       Comment e-mails and permissions
 - [Contentfilter](https://github.com/Tsjippy/contentfilter)             Make uploads and pages for logged-in users only or per role
-- [Default pictures](https://github.com/Tsjippy/defaultpictures)        Define default piictures for new content if not set
+- [Default pictures](https://github.com/Tsjippy/defaultpictures)        Define default pictures for new content if not set
 - [Embed page](https://github.com/Tsjippy/embedpage)                    Embed a post in another post
 - [Events](https://github.com/Tsjippy/events)                           Display (recurring) events on a calendar and feed
-- [Html email](https://github.com/Tsjippy/fancyemail)                   Auto create nice loking e-mails
+- [Html email](https://github.com/Tsjippy/fancyemail)                   Auto create nice looking e-mails
 - [Forms](https://github.com/Tsjippy/forms)                             Advanced formbuilder
 - [Frontend posting](https://github.com/Tsjippy/frontendposting)        Create content from the frontend
 - [Heic to jpeg](https://github.com/Tsjippy/heictojpeg)                 Auto convert heic to jpeg

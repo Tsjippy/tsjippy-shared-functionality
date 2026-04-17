@@ -63,7 +63,7 @@ function saveEmails(){
 		return '';
 	}
 
-    $moduleSlug	    = $_POST['module'];
+    $moduleSlug	    = sanitize_text_field($_POST['module']);
     $options		= $_POST['emails'];
     unset($options['module']);
 

@@ -29,18 +29,18 @@ function validateUrl($param){
 
 function removeDocument(){
 
-    if(!empty($_POST['nonce']) && !wp_verify_nonce(wp_unslash(sanitize_text_field($_POST['nonce'])), 'file-delete')){
+    if(!empty($_POST['nonce']) && !wp_verify_nonce($_POST['nonce'], 'file-delete')){
         return new \WP_Error('file uploader', 'Please reload the page and try again');
     }
 
-    if(empty($url)){
+    if(empty($_POST['url'])){
         return false;
     }
 
-    $path = ABSPATH.wp_unslash($_POST['url']);
+    $path = ABSPATH.wp_unslash(sanitize_url($_POST['url']));
 
     if(isset($_POST['user-id'])){
-        $userId = sanitize_text_field($_POST["user-id"]);
+        $userId = (int) $_POST["user-id"];
     }
 
     if(isset($_POST['metakey'])){

@@ -1,5 +1,7 @@
 <?php
 
+ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 //Widget title, depending on page
 add_filter( 'widget_title', __NAMESPACE__.'\widgetTitle', 10, 2);
 function widgetTitle($title, $instance=[]){
