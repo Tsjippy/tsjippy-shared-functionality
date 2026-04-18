@@ -10,6 +10,7 @@
 - plugin name to tsjippy-shared-functionality
 - split in pro
 - db calls ar enow cached for family
+- improve performance
 
 ### Fixed
 - heartbeat issues
