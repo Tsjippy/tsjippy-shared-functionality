@@ -13,8 +13,6 @@ class AdminMenu{
      * Constructor
      */
     public function __construct() {
-        add_action( 'admin_menu', [$this, 'adminMenu']);
-
         $this->tab      = 'settings';
         if(isset($_GET['tab'])){
             $this->tab  = sanitize_key($_GET['tab']);
@@ -24,30 +22,38 @@ class AdminMenu{
 
         // Register a custom menu page.
         add_menu_page("SIM Plugin Settings", "SIM Settings", 'edit_others_posts', "sim", [$this, "mainMenu"]);
-    }
-    
-    public function mainMenu(){
-        do_action('sim_module_actions');
 
         foreach(wp_get_active_and_valid_plugins() as $plugin){
-            if(strpos($plugin, 'tsjippy-') !== false && strpos($plugin, 'tsjippy-shared-functionality') === false){
+            if(
+                strpos($plugin, 'tsjippy-') !== false &&                    // Only add submenu for tsjippy plugins
+                strpos($plugin, 'tsjippy-shared-functionality') === false   // But not for the shared functionality plugin
+            ){
                 $slug = str_replace('tsjippy-', '', basename($plugin, '.php'));
                 $name = ucwords(str_replace('-', ' ', $slug));
     
                 add_submenu_page(
-                    $slug, 
+                    'sim', 
                     $name, 
                     $name, 
                     "edit_others_posts", 
-                    $slug, 
+                    "sim_$slug", 
                     function() use ( $name, $slug ){
-                        buildSubMenu($name, $slug);
+                        $this->buildSubMenu($name, $slug);
                     }
                 );
             }
         }
+    }
     
-        return '<div class="wrap"><h1>SIM Plugin Settings</h1><p>Welcome to the SIM Plugin Settings page!</p></div>';
+    public function mainMenu(){
+        do_action('sim_module_actions');
+    
+        ?>
+        <div class="wrap">
+            <h1>SIM Plugin Settings</h1>
+            <p>Welcome to the SIM Plugin Settings page!</p>
+        </div>
+        <?php
     }
 
      /**
@@ -64,7 +70,7 @@ class AdminMenu{
         $classString		= 'tablink';
         
         if($this->tab == $slug){
-            $classString	+= ' active';
+            $classString	.= ' active';
         }
         
         $attributes				= [
@@ -102,7 +108,7 @@ class AdminMenu{
 
         $this->settings	= get_option("sim_$slug");
 
-        $this->mainDiv	= addElement('div', '', ['class' => 'module-settings'], '', $this->dom);
+        $this->mainDiv	= addElement('div', $this->dom, ['class' => 'module-settings'], '', $this->dom);
         addElement('h1', $this->mainDiv, [], "$name plugin settings", $this->dom);
 
         $this->tabLinkButtonsWrapper	= addElement('div', $this->mainDiv, ['class' => 'tablink-wrapper'], '', $this->dom);            
@@ -128,7 +134,7 @@ class AdminMenu{
             addRawHtml($message, $parent, $this->dom);
         }
 
-        return $this->dom->saveHtml();
+        echo $this->dom->saveHtml();
     }
 
     public function handlePost(){

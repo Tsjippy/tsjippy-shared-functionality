@@ -51,3 +51,7 @@ table{
 .hidden{
 	display:none !important;
 }
+
+.tablink-wrapper:not(:has(:nth-child(2))){
+    display: none
+}
