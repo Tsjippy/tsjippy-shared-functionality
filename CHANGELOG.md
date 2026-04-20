@@ -12,6 +12,7 @@
 - split in pro
 - db calls ar enow cached for family
 - improve performance
+- preparing for sub-plugin
 
 ### Fixed
 - heartbeat issues
