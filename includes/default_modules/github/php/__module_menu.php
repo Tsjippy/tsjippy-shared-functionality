@@ -2,6 +2,8 @@
 namespace SIM\GITHUB;
 use SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 const MODULE_VERSION		= '8.0.0';
 DEFINE(__NAMESPACE__.'\MODULE_SLUG', strtolower(basename(dirname(__DIR__))));
 

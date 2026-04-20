@@ -4,6 +4,8 @@ use SIM;
 use Github\Exception\ApiLimitExceedException;
 use Github\Client;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 // https://github.com/KnpLabs/php-github-api 	-- github api
 // https://github.com/michelf/php-markdown		-- convert markdown to html
 

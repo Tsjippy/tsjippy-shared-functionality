@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 add_action( 'rest_api_init',  __NAMESPACE__.'\blockRestApiInit');
 function blockRestApiInit() {
 	// show post children

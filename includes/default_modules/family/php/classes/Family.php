@@ -2,6 +2,8 @@
 namespace SIM\FAMILY;
 use SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class Family{
     public $tableName;
     public $metaTableName;
@@ -594,12 +596,15 @@ class Family{
             $wpdb->prepare("DELETE FROM %i WHERE (`user_id_1` = %d AND `user_id_2` = %d ) OR (`user_id_1` = %d AND `user_id_2` = %d )", $this->tableName, $userId1, $userId2, $userId2, $userId1)
         );
 
-        // Check if this was the last family relationship
-        $results    = $wpdb->get_results(
-            $wpdb->prepare("SELECT * FROM %i WHERE family_id=%d", $this->tableName, $familyId)
-        );
+        if(!empty($familyId)){
 
-        if(empty($results)){
+            // Check if this was the last family relationship
+            $results    = $wpdb->get_results(
+                $wpdb->prepare("SELECT * FROM %i WHERE family_id=%d", $this->tableName, $familyId)
+            );
+        }
+
+        if(empty($familyId) || empty($results)){
             // Delete any meta's
             $wpdb->delete(
                 $this->metaTableName,

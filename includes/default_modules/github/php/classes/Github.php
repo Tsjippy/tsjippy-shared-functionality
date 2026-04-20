@@ -7,6 +7,8 @@ use Github\Api\Repository\Contents;
 use \Github\Client;
 use WP_Error;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class Github{
     public  $client;
     public  $token;

@@ -2,6 +2,8 @@
 namespace SIM\ADMIN;
 use SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 abstract class MailSetting{
     public $keyword;
     public $replaceArray;

@@ -2,6 +2,8 @@
 namespace SIM\ADMIN;
 use SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class AdminMenu{
     public $tab;
     public $tabLinkButtonsWrapper;
