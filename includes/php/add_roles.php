@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 add_action( 'show_user_profile', __NAMESPACE__.'\extraUserRoles' );
 add_action( 'edit_user_profile', __NAMESPACE__.'\extraUserRoles' );
 /**

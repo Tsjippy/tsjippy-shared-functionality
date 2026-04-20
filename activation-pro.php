@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 // Add dl file and .htaccess rules on activation
 add_action( 'activated_plugin', function ( $plugin ) {
     if( $plugin != PLUGIN ) {

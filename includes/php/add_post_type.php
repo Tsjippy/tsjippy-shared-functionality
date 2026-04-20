@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /*
 	In this file we define a new post type: recipe
 	We also define a new taxonomy (category): recipetype

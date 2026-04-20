@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 //Shortcode for testing
 add_shortcode("test", function ($atts){
     require_once ABSPATH . 'wp-admin/includes/upgrade.php';

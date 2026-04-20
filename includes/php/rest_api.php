@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 add_action( 'rest_api_init', __NAMESPACE__.'\restApiInit');
 function restApiInit() {
 	register_rest_route( 

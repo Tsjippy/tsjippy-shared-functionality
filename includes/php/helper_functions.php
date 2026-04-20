@@ -3,6 +3,8 @@ namespace SIM;
 
 use WP_Error;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
  * Create a dropdown with all users
  * @param	bool		$returnFamily  	Whether we should group families in one entry default false

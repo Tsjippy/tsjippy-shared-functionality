@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 set_error_handler(__NAMESPACE__.'\printError');
 function printError( $errno, $errstr, $errfile, $errline ) {
     if( 

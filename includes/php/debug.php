@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 add_shortcode('debug', function($atts){
     wp_enqueue_script('sim_debug_script');
 

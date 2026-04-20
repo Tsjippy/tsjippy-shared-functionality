@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 //Add setting link to plugin page
 add_filter("plugin_action_links_".PLUGIN, __NAMESPACE__.'\addExtraPluginLinks', 10, 3);
 function addExtraPluginLinks($links, $plugin, $data) {

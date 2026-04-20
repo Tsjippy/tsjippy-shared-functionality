@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 // run on activation
 add_action( 'activated_plugin', function ( $plugin ) {
     if( $plugin != PLUGIN ) {

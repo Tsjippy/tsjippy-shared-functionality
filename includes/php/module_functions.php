@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
  * Retrievs the value of a certain module setting
  * @param	string 	$moduleName		The module name'

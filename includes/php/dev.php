@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
  * Prints something to the log file and optional to the screen
  * @param 	string		$message	 			The message to be printed

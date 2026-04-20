@@ -10,8 +10,8 @@ function loadAdminAssets($hook) {
 		return;
 	}
 
-	wp_enqueue_style('sim_admin_css', plugins_url('css/admin.min.css', __DIR__), array(), PLUGINVERSION);
-	wp_enqueue_script('sim_admin_js', plugins_url('js/admin.min.js', __DIR__), array() , PLUGINVERSION, true);
+	wp_enqueue_style('sim_admin_css', plugins_url('css/admin.min.css', __DIR__), array(), SIM\PLUGINVERSION);
+	wp_enqueue_script('sim_admin_js', plugins_url('js/admin.min.js', __DIR__), array() , SIM\PLUGINVERSION, true);
 
 	wp_localize_script( 'sim_admin_js',
 		'sim',

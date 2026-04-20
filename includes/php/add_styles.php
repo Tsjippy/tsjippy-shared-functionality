@@ -1,7 +1,7 @@
 <?php
 namespace SIM;
 
-const STYLE_VERSION		= '7.1.26';
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 //Add js and css files
 add_action( 'wp_enqueue_scripts', __NAMESPACE__.'\enqueueScripts', 1);
@@ -10,7 +10,7 @@ add_action( 'admin_enqueue_scripts', __NAMESPACE__.'\registerScripts');
 // Style the buttons in the media library
 add_action( 'wp_enqueue_media', __NAMESPACE__.'\enqueuMediaStyle');
 function enqueuMediaStyle(){
-    wp_enqueue_style('sim_media_style', plugins_url('css/media.min.css', __DIR__), [], STYLE_VERSION);
+    wp_enqueue_style('sim_media_style', plugins_url('css/media.min.css', __DIR__), [], PLUGINVERSION);
 }
 
 function registerScripts($hook=''){
@@ -22,7 +22,7 @@ function registerScripts($hook=''){
 
 	$runned	= true;
 	if(!is_user_logged_in()){
-		wp_enqueue_script('sim_nonce_script', plugins_url('js/nonce.min.js', __DIR__), [], STYLE_VERSION, false);
+		wp_enqueue_script('sim_nonce_script', plugins_url('js/nonce.min.js', __DIR__), [], PLUGINVERSION, false);
 		wp_localize_script( 'sim_nonce_script',
 			'sim',
 			array(
@@ -35,33 +35,33 @@ function registerScripts($hook=''){
 
 	//LIBRARIES 
     //selectable select table cells https://github.com/Mobius1/Selectable
-	wp_register_script('selectable', plugins_url('js/selectable.min.js', __DIR__), array(), null, true);
+	wp_register_script('selectable', plugins_url('js/selectable.min.js', __DIR__), array(), PLUGINVERSION, true);
 
 	//selectable select table cells https://github.com/Mobius1/Selectable
-	wp_register_script('smiley', plugins_url('js/smiley.min.js', __DIR__), array(), null, true);
+	wp_register_script('smiley', plugins_url('js/smiley.min.js', __DIR__), array(), PLUGINVERSION, true);
 
 	//sortable library: https://github.com/SortableJS/Sortable#bs
-	//wp_register_script('sortable', 'https://SortableJS.github.io/Sortable/Sortable.js', array(), STYLE_VERSION,true);
+	//wp_register_script('sortable', 'https://SortableJS.github.io/Sortable/Sortable.js', array(), PLUGINVERSION,true);
 	wp_register_script('sortable', plugins_url('js/sortable.min.js', __DIR__), array(), '1.15.6', true);
 	
 	//Sweet alert https://sweetalert2.github.io/
 	wp_register_script('sweetalert', plugins_url('js/sweetalert.min.js', __DIR__), array(), '11.4.18', true);
 
 	//add main.js
-	wp_register_script('sim_script', plugins_url('js/main.min.js', __DIR__), array( 'sweetalert'), STYLE_VERSION, true);
+	wp_register_script('sim_script', plugins_url('js/main.min.js', __DIR__), array( 'sweetalert'), PLUGINVERSION, true);
 
 	// purify library
 	wp_register_script('sim_purify', plugins_url('js/purify.min.js', __DIR__), array(), '2.3.8', true);
 
 	//Submit forms
-	wp_register_script('sim_user_select_script', plugins_url('js/user_select.min.js', __DIR__), array('sweetalert'), STYLE_VERSION, true);
-	wp_register_script('sim_formsubmit_script', plugins_url('js/formsubmit.min.js', __DIR__), array('sim_script'), STYLE_VERSION, true);
+	wp_register_script('sim_user_select_script', plugins_url('js/user_select.min.js', __DIR__), array('sweetalert'), PLUGINVERSION, true);
+	wp_register_script('sim_formsubmit_script', plugins_url('js/formsubmit.min.js', __DIR__), array('sim_script'), PLUGINVERSION, true);
 
 	//table request shortcode
-	wp_register_script('sim_table_script', plugins_url('js/table.min.js', __DIR__), array('sortable', 'sim_formsubmit_script'), STYLE_VERSION, true);
+	wp_register_script('sim_table_script', plugins_url('js/table.min.js', __DIR__), array('sortable', 'sim_formsubmit_script'), PLUGINVERSION, true);
 
 	// Debug request shortcode
-	wp_register_script('sim_debug_script', plugins_url('js/debug.js', __DIR__), [], STYLE_VERSION, false);
+	wp_register_script('sim_debug_script', plugins_url('js/debug.js', __DIR__), [], PLUGINVERSION, false);
 
 	wp_localize_script( 'sim_script',
 		'sim',
@@ -75,7 +75,7 @@ function registerScripts($hook=''){
 		)
 	);
 	
-	wp_register_style('sim_taxonomy_style', plugins_url('css/taxonomy.min.css', __DIR__), array(), STYLE_VERSION);
+	wp_register_style('sim_taxonomy_style', plugins_url('css/taxonomy.min.css', __DIR__), array(), PLUGINVERSION);
 
 	if($hook == 'post.php'){
 		enqueueScripts();
@@ -102,7 +102,7 @@ function enqueueScripts(){
 
 	//style fo main site
 	if(!is_admin()){
-		wp_enqueue_style( 'sim_style', plugins_url('css/sim.min.css', __DIR__), array(), STYLE_VERSION);
+		wp_enqueue_style( 'sim_style', plugins_url('css/sim.min.css', __DIR__), array(), PLUGINVERSION);
 	}
 }
 

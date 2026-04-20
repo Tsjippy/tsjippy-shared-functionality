@@ -1,6 +1,7 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Runs after a succesfull update of the plugin
 add_action( 'upgrader_process_complete', __NAMESPACE__.'\upgradeSucces', 10, 2 );

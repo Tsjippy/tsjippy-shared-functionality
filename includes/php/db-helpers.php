@@ -1,7 +1,8 @@
 <?php
 namespace SIM;
-
 use WP_Error;
+
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Search every table and column in the db
@@ -94,6 +95,19 @@ function storeInTransient($key, $value){
     $_SESSION[$key] = $value;
 }
 
+function recursiveSanitizeMixedValue( $value ) {
+    if ( is_array( $value ) ) {
+        // Recursively sanitize each element in the array
+        foreach ( $value as $key => &$child_value ) {
+            $child_value = recursiveSanitizeMixedValue( $child_value );
+        }
+        return $value;
+    } else {
+        // Sanitize string/int values
+        return sanitize_text_field( $value );
+    }
+}
+
 /**
  * Retrieves a temporary stored value
  *
@@ -110,7 +124,7 @@ function getFromTransient($key){
 		return false;
 	}
 
-    $value  = $_SESSION[$key]; 
+    $value  = recursiveSanitizeMixedValue($_SESSION[$key]); 
 
     return $value;
 }

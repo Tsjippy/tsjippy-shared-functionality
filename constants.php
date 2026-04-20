@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 $pluginData = get_plugin_data(PLUGIN_PATH, false, false);
 
 // Define constants

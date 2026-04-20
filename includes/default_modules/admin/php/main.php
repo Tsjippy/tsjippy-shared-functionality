@@ -2,7 +2,7 @@
 namespace SIM\ADMIN;
 use SIM;
 
-if(PLUGINVERSION < '7.0.0') {
+if(SIM\PLUGINVERSION < '7.0.0') {
     return;
 }
 

@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 // Only use for old plugins
 if(PLUGINVERSION >= '7.0.0'){
     return;

@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
  * Schedule a function
  * @param	string 		$taskName			The name to be used for the task

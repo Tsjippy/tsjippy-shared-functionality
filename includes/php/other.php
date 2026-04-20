@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 //Change the timeout on post locks
 add_filter( 'wp_check_post_lock_window', __NAMESPACE__.'\postLock');
 function postLock(){ 
