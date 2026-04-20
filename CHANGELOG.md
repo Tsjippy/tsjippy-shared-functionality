@@ -4,6 +4,7 @@
 ### Added
 - adminmenu class
 - if ( ! defined( 'ABSPATH' ) ) exit; safety
+- if ( ! defined( 'ABSPATH' ) ) exit;
 
 ### Changed
 - displaying admin menu messages
