@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+$pluginData = get_plugin_data(PLUGIN_PATH, false, false);
+
 // Define constants
 define(__NAMESPACE__ .'\PLUGINNAME', 'tsjippy-shared-functionality');
 define('SITEURL', site_url( '', 'https' ));

@@ -133,8 +133,8 @@ function init(){
 	if( ! function_exists('get_plugin_data') ){
 		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	}
-	if(get_option('sim_version') != get_plugin_data(__FILE__)['Version']){
-		update_option('sim_version', get_plugin_data(__FILE__)['Version']);
+	if(get_option('sim_version') != PLUGINVERSION){
+		update_option('sim_version', PLUGINVERSION);
 	}
 
 	//wp_deregister_script('heartbeat');

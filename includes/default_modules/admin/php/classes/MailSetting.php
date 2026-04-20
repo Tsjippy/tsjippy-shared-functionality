@@ -5,7 +5,6 @@ use SIM;
 abstract class MailSetting{
     public $keyword;
     public $replaceArray;
-    public $moduleSlug;
     public $subjectKey;
     public $messageKey;
     public $headerKey;
@@ -20,14 +19,13 @@ abstract class MailSetting{
      *
      * @param   string  $keyword    The keyword to use in the settings array
      */
-    public function __construct($keyword, $moduleSlug) {
+    public function __construct($keyword, $slug) {
         $this->replaceArray     = [
             '%site_url%'    => SITEURL,
             '%site_name%'   => SITENAME
         ];
 
         $this->keyword          = $keyword;
-        $this->moduleSlug       = $moduleSlug;
         $this->subjectKey       = $this->keyword."_subject";
         $this->messageKey       = $this->keyword."_message";
         $this->headerKey        = $this->keyword."_header";
@@ -35,19 +33,17 @@ abstract class MailSetting{
         $this->message          = '';
         $this->headers          = [];
 
-        $emailSettings          = SIM\getModuleOption($this->moduleSlug, 'emails');
-        if($emailSettings){
-            if(isset($emailSettings[$this->subjectKey])){
-                $this->subject  = $emailSettings[$this->subjectKey];
-            }
+        $emailSettings          = get_option("sim_$slug")['emails'] ?? [];
+        if(isset($emailSettings[$this->subjectKey])){
+            $this->subject  = $emailSettings[$this->subjectKey];
+        }
 
-            if(isset($emailSettings[$this->messageKey])){
-                $this->message  = $emailSettings[$this->messageKey];
-            }
+        if(isset($emailSettings[$this->messageKey])){
+            $this->message  = $emailSettings[$this->messageKey];
+        }
 
-            if(isset($emailSettings[$this->headerKey])){
-                $this->headers  = $emailSettings[$this->headerKey];
-            }
+        if(isset($emailSettings[$this->headerKey])){
+            $this->headers  = $emailSettings[$this->headerKey];
         }
     }
 

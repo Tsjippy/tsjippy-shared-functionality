@@ -106,7 +106,7 @@ class AdminMenu{
             return '';
         }
 
-        $this->settings	= get_option("sim_$slug");
+        $this->settings	= get_option("sim_$slug", []);
 
         $this->mainDiv	= addElement('div', $this->dom, ['class' => 'module-settings'], '', $this->dom);
         addElement('h1', $this->mainDiv, [], "$name plugin settings", $this->dom);

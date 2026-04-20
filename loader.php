@@ -1,6 +1,11 @@
 <?php
 namespace SIM;
 
+// Only use for old plugins
+if(PLUGINVERSION >= '7.0.0'){
+    return;
+}
+
 /**
  * Gets the module name based on the slug
  *
