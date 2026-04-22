@@ -17,6 +17,7 @@
 - improve performance
 - preparing for sub-plugin
 - code reorder
+- from style_version to pluginversion
 
 ### Fixed
 - heartbeat issues
