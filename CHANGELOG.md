@@ -5,6 +5,7 @@
 - adminmenu class
 - if ( ! defined( 'ABSPATH' ) ) exit; safety
 - if ( ! defined( 'ABSPATH' ) ) exit;
+- use of wp_get_environment_type()
 
 ### Changed
 - displaying admin menu messages
