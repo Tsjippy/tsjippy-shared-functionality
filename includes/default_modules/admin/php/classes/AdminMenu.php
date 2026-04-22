@@ -48,7 +48,7 @@ class AdminMenu{
     }
     
     public function mainMenu(){
-        do_action('sim_module_actions');
+        do_action('sim_plugin_actions');
     
         ?>
         <div class="wrap">
@@ -101,7 +101,7 @@ class AdminMenu{
     }
 
     /**
-     * Builds the submenu for each module
+     * Builds the submenu for each plugin
      */
     public function buildSubMenu($name, $slug){
         if(empty($_GET['page'])){
@@ -121,7 +121,6 @@ class AdminMenu{
         $functionsTab       = $this->functionsTab($slug, $name);
 
         $message	        = $this->handlePost();
-
         if($this->tab == 'settings'){
             $parent = $settingsTab;
         }elseif($this->tab == 'emails'){
@@ -133,7 +132,7 @@ class AdminMenu{
         }
 
         if(!empty($message)){
-            addRawHtml($message, $parent, $this->dom);
+            addRawHtml($message, $parent, 'afterBegin');
         }
 
         echo $this->dom->saveHtml();
@@ -145,8 +144,8 @@ class AdminMenu{
         ob_start();
     
         ?>
-        <form action="" method="put">
-            <input type='hidden' class='no-reset' name='module' value='<?php echo esc_html($slug);?>'>
+        <form action="" method="post">
+            <input type='hidden' class='no-reset' name='plugin' value='<?php echo esc_html($slug);?>'>
             <input type='hidden' class='no-reset' name='nonce' value='<?php echo esc_html(wp_create_nonce('plugin-settings'));?>'>
 
             <div class='options'>
@@ -177,7 +176,7 @@ class AdminMenu{
             ?>
         </form>
         <?php
-        addRawHtml(ob_get_clean(), $node, $this->dom);
+        addRawHtml(ob_get_clean(), $node);
 
         return $node;
     }
@@ -194,8 +193,8 @@ class AdminMenu{
         ob_start();
 
         ?>
-        <form action="" method="put">
-            <input type='hidden' class='no-reset' name='module' value='<?php echo esc_html($slug);?>'>
+        <form action="" method="post">
+            <input type='hidden' class='no-reset' name='plugin' value='<?php echo esc_html($slug);?>'>
             <?php
             echo $html;
             ?>
@@ -205,13 +204,13 @@ class AdminMenu{
         </form>
         <?php
 
-        addRawHtml(ob_get_clean(), $node, $this->dom);
+        addRawHtml(ob_get_clean(), $node);
 
         return $node;
     }
 
     public function dataTab($slug, $name){
-        $html	= apply_filters("sim_module_{$slug}_data", '', $this->settings, $name);
+        $html	= apply_filters("sim_plugin_{$slug}_data", '', $this->settings, $name);
 
         if(empty($html)){
             return '';
@@ -219,13 +218,13 @@ class AdminMenu{
 
         $node    = $this->mainNode('data', 'Data Settings');
 
-        addRawHtml($html, $node, $this->dom);
+        addRawHtml($html, $node);
 
         return $node;
     }
 
     public function functionsTab($slug, $name){
-        $html	= apply_filters("sim_module_{$slug}_functions", '', $this->settings, $name);
+        $html	= apply_filters("sim_plugin_{$slug}_functions", '', $this->settings, $name);
 
         if(empty($html)){
             return '';
@@ -233,7 +232,7 @@ class AdminMenu{
 
         $node    = $this->mainNode('functions', 'Functions');
 
-        addRawHtml($html, $node, $this->dom);
+        addRawHtml($html, $node);
 
         return $node;
     }
@@ -252,10 +251,10 @@ class AdminMenu{
 
         if(isset($_POST['emails'])){
             $message	.= "<div class='success'>E-mail settings succesfully saved</div>";
-            saveEmails();
+            $this->saveEmails();
         }else{
             $message	.= "<div class='success'>Settings succesfully saved</div>";
-            saveSettings();
+            $this->saveSettings();
         }
         
         // Build the message
@@ -275,7 +274,7 @@ class AdminMenu{
     }
 
     /**
-    * Saves modules settings from $_POST
+    * Saves plugins settings from $_POST
     */
     public function saveSettings(){
         if(
@@ -288,7 +287,8 @@ class AdminMenu{
 
         $slug	    = sanitize_key(wp_unslash($_POST['plugin']));
         $options	= $_POST;
-        unset($options['module']);
+        unset($options['plugin']);
+        unset($options['nonce']);
 
         foreach($options as &$option){
             $option = SIM\deslash($option);
@@ -300,12 +300,12 @@ class AdminMenu{
          * @param   array   $settings   The current saved settings, before saving the new ones
          * @return  array                The options to save, after being processed by the filter
          */
-        $settings	= apply_filters("sim_module_{$slug}_after_save", $options, get_option("sim_{$slug}_settings", []));
+        $settings	= apply_filters("sim_plugin_{$slug}_after_save", $options, get_option("sim_{$slug}_settings", []));
 
         update_option("sim_{$slug}_settings", $settings);
     }
 
-    function saveEmails(){
+    public function saveEmails(){
         if(
             !isset($_POST['plugin']) ||
             !isset($_POST['nonce']) ||

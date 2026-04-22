@@ -2,9 +2,9 @@
 namespace SIM;
 
 /**
- * Version:      		6.0.6
- * Plugin Name:  		Shared Functionality For Others
+ * Plugin Name:  		Shared Functionality For Others 
  * Description:  		Shared functionality for a bundle of 34 plugins to add AJAX login, forms and other functionality
+ * Version:      		6.0.6
  * Author:       		Ewald Harmsen
  * Author URI:			https://harmseninnigeria.nl
  * Requires at least:	6.3
@@ -12,7 +12,7 @@ namespace SIM;
  * Tested up to: 		6.9
  * Plugin URI:			https://github.com/Tsjippy/tsjippy-shared-functionality/
  * Tested:				6.9	
- * TextDomain:			tsjippy
+ * TextDomain:			tsjippy-shared-functionality
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
@@ -35,7 +35,7 @@ if(!isset($_SERVER['HTTP_SEC_FETCH_DEST'])){
 //only call it once
 //remove_action( 'wp_head', 'adjacent_posts_rel_link');
 define(__NAMESPACE__ .'\PLUGIN', plugin_basename(__FILE__));
-define(__NAMESPACE__ .'\PLUGIN_PATH', __FILE__);
+define(__NAMESPACE__ .'\PLUGINPATH', __FILE__);
 
 $files = glob(__DIR__  . '/*.php');
 foreach ($files as $file) {
@@ -45,5 +45,5 @@ foreach ($files as $file) {
 //Register a function to run on plugin deactivation
 register_deactivation_hook( __FILE__, __NAMESPACE__.'\onDeactivation');
 function onDeactivation() {
-	printArray("Removing cron schedules");
+	
 }

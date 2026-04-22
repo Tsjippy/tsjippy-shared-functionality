@@ -53,7 +53,7 @@ spl_autoload_register(function ($classname) {
         return;
 	}else{
         // If the class file does not exist, throw an error
-        trigger_error(esc_html("Class $classname not found in file $classFile"), E_USER_ERROR);
+        trigger_error("Class $classname not found in file $classFile", E_USER_ERROR);
     }
 });
 

@@ -3,7 +3,7 @@ namespace SIM;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-$pluginData = get_plugin_data(PLUGIN_PATH, false, false);
+$pluginData = get_plugin_data(PLUGINPATH, false, false);
 
 // Define constants
 define(__NAMESPACE__ .'\PLUGINNAME', 'tsjippy-shared-functionality');
@@ -19,6 +19,7 @@ define(__NAMESPACE__ .'\PICTURESPATH', INCLUDESPATH.'pictures/');
 define('RESTAPIPREFIX', 'sim/v2');
 define('DATEFORMAT', get_option('date_format'));
 define('TIMEFORMAT', get_option('time_format'));
+
 
 /**
  * Old constants, to be removed in the future

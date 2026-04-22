@@ -2,6 +2,8 @@
 namespace SIM\FILEUPLOAD;
 use SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 //Make upload_files function availbale for AJAX request
 add_action ( 'wp_ajax_upload-files', __NAMESPACE__.'\ajaxUploadFiles');
 function ajaxUploadFiles(){

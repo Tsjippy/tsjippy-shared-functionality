@@ -2,6 +2,8 @@
 namespace SIM\ADMIN;
 use SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 function recurrenceSelector($curFreq){
 	$selected	= 'selected="selected"';
 	?>
@@ -105,18 +107,17 @@ function printJs(){
 	<?php
 }
 
-function addElement($type, $parent='', $attributes=[], $textContent='', $dom=''){
+function addElement($type, $parent='', $attributes=[], $textContent=''){
 	if(empty($parent)){
 		return;
 	}
 
-	if(empty($dom)){
-		$dom	= new \DOMDocument();
-	}
-
 	if(empty($parent)){
+		$dom	= new \DOMDocument();
 		$parent	= $dom;
 	}
+
+	$dom	= $parent->ownerDocument ?? $parent;
 
 	try {
 		// Text content should not contain <br> tags, replace them with new line characters
@@ -161,7 +162,15 @@ function addElement($type, $parent='', $attributes=[], $textContent='', $dom='')
 	return $node;
 }
 
-function addRawHtml($html, $parent, $dom){
+/**
+ * Converst a string of HTML into a DOM element and adds it to the parent element
+ * @param	string		$html	The HTML string to convert
+ * @param	DOMElement	$parent	The parent element to add the new element to
+ * @param	string		$position	The position to add the new element (beforeEnd, afterBegin, beforeBegin, afterEnd)
+ * 
+ * @return	DOMElement|false	The newly created DOM element or false if the HTML string was empty
+ */
+function addRawHtml($html, $parent, $position='beforeEnd'){
 	if(empty($html)){
 		return false;
 	}
@@ -173,8 +182,20 @@ function addRawHtml($html, $parent, $dom){
 
 	// Import the node
 	foreach ($tempDom->getElementsByTagName('body')->item(0)->childNodes as $node) {
-		$node 		= $dom->importNode($node, true);
-		$node		= $parent->appendChild($node);
+		$node 		= $parent->ownerDocument->importNode($node, true);
+
+		if($position === 'beforeEnd'){
+			$node		= $parent->appendChild($node);
+		}elseif($position === 'afterBegin'){
+			$node		= $parent->insertBefore($node, $parent->firstChild);
+		}elseif($position === 'beforeBegin'){
+			$node		= $parent->parentNode->insertBefore($node, $parent);
+		}elseif($position === 'afterEnd'){
+			$node		= $parent->parentNode->insertBefore($node, $parent.nextSibling);
+		}else{
+			// Default to appending if position is not recognized
+			$node		= $parent->appendChild($node);
+		}
 	}
 
 	return $node;

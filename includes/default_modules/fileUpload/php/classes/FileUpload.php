@@ -2,6 +2,8 @@
 namespace SIM\FILEUPLOAD;
 use SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class FileUpload{
 	public $userId;
 	public $metaKey;

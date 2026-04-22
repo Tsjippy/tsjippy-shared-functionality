@@ -596,15 +596,12 @@ class Family{
             $wpdb->prepare("DELETE FROM %i WHERE (`user_id_1` = %d AND `user_id_2` = %d ) OR (`user_id_1` = %d AND `user_id_2` = %d )", $this->tableName, $userId1, $userId2, $userId2, $userId1)
         );
 
-        if(!empty($familyId)){
+        // Check if this was the last family relationship
+        $results    = $wpdb->get_results(
+            $wpdb->prepare("SELECT * FROM %i WHERE family_id=%d", $this->tableName, $familyId)
+        );
 
-            // Check if this was the last family relationship
-            $results    = $wpdb->get_results(
-                $wpdb->prepare("SELECT * FROM %i WHERE family_id=%d", $this->tableName, $familyId)
-            );
-        }
-
-        if(empty($familyId) || empty($results)){
+        if(empty($results)){
             // Delete any meta's
             $wpdb->delete(
                 $this->metaTableName,

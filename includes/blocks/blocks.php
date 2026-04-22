@@ -11,7 +11,7 @@ function addBlockJs(){
         'sim-block-filter',
         plugins_url('blocks/block_filters/build/index.js', __DIR__),
         [ 'wp-blocks', 'wp-dom', 'wp-dom-ready', 'wp-edit-post' ],
-        STYLE_VERSION,
+        PLUGINVERSION,
 		true
     );
 	

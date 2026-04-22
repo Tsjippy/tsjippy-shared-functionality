@@ -1256,3 +1256,65 @@ add_action('init', __NAMESPACE__.'\processImagesAction');
 function processImagesAction() {
 	add_action( 'process_images_action', __NAMESPACE__.'\processImages' );
 }
+
+
+
+/**
+ * Prints something to the log file and optional to the screen
+ * @param 	string		$message	 			The message to be printed
+ * @param	bool		$display				Whether to print the message to the screen or not
+ * @param	bool|int	$printFunctionHiearchy	Whether to print the full backtrace, false for not printing, true for all, number for max depth
+*/
+function printArray($message, $display=false, $printFunctionHiearchy=false, $error=false){
+	$bt		= debug_backtrace();
+
+	if($error){
+		$type 			= 0;
+		$destination 	= null;
+	}else{
+		$type 			= 3;
+		$destination	= WP_CONTENT_DIR.'/notice.log';
+	}
+
+	if($printFunctionHiearchy){
+		error_log("Called from:", $type, $destination);
+		foreach($bt as $index => $trace){
+			// stop if we have reached the max depth
+			if(is_numeric($printFunctionHiearchy) && $index == $printFunctionHiearchy){
+				break;
+			}
+			
+			$path	= str_replace(MODULESPATH, '', $trace['file']);
+
+			error_log("$index\n", $type, $destination);
+			error_log( "    File: $path\n", $type, $destination);
+			error_log( "    Line {$trace['line']}\n", $type, $destination);
+			error_log( "    Function: {$trace['function']}\n", $type, $destination);
+			error_log( "    Args:\n", $type, $destination);
+			error_log(print_r($trace['args'], true), $type, $destination);
+		}
+	}else{
+		$caller = array_shift($bt);
+		$path	= str_replace(MODULESPATH, '', $caller['file']);
+		error_log("Called from file $path line {$caller['line']}\n", $type, $destination);
+	}
+
+	if(is_array($message) || is_object($message)){
+		error_log(print_r($message, true), $type, $destination);
+	}else{
+		error_log(gmdate(DATEFORMAT.' '.TIMEFORMAT, time()).' - '.$message."\n", $type, $destination);
+	}
+	
+	if($display){
+		?>
+		<pre>
+			Called from file <?php echo esc_html($caller['file']);?> line <?php echo esc_html($caller['line']);?>
+			<br>
+			<br>
+			<?php 
+			echo wp_kses_post(print_r($message));
+			?>
+		</pre>
+		<?php
+	}
+}

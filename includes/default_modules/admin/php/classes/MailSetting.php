@@ -114,7 +114,7 @@ abstract class MailSetting{
                         <h4 class="label-text">Header <?php echo esc_html($index + 1);?></h4>
                     </label>
                     <div class="button-wrapper" style="width:100%; display: flex;">
-                        <input type="text" name="emails[<?php echo esc_html($this->headerKey);?>][<?php echo esc_html($index);?>]" id="headers" class=" formfield formfield-input" value="<?php echo esc_html($header);?>" style="width: 500px;">
+                        <input type="text" name="emails[<?php echo esc_html($this->headerKey);?>][<?php echo esc_html($index);?>]" class="headers formfield formfield-input" value="<?php echo esc_html($header);?>" style="width: 500px;">
                         <?php
                         if(count($this->headers) > 1){
                             ?>

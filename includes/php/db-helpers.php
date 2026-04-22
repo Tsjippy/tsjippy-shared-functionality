@@ -1,8 +1,13 @@
 <?php
 namespace SIM;
+
 use WP_Error;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
+
+if(!isset($_SESSION)){
+	session_start();
+}
 
 /**
  * Search every table and column in the db
@@ -89,9 +94,6 @@ function searchAllDB($search, $excludedTables=[], $excludedColumns=[]){
  * @param   string|int|array|object     $value  The value
  */
 function storeInTransient($key, $value){
-    if(!isset($_SESSION)){
-        session_start();
-    }
     $_SESSION[$key] = $value;
 }
 
@@ -116,15 +118,13 @@ function recursiveSanitizeMixedValue( $value ) {
  * @return  mixed			The value or false if no value
  */
 function getFromTransient($key){
-    if(!isset($_SESSION)){
-        session_start();
-    }
-
 	if(!isset($_SESSION[$key])){
 		return false;
 	}
 
-    $value  = recursiveSanitizeMixedValue($_SESSION[$key]); 
+    $value  = $_SESSION[$key]; 
+
+	$value  = recursiveSanitizeMixedValue($_SESSION[$key]); 
 
     return $value;
 }

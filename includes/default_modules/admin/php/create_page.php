@@ -2,6 +2,8 @@
 namespace SIM\ADMIN;
 use SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 /**
  *
  * Creates a default page if it does not exist yet

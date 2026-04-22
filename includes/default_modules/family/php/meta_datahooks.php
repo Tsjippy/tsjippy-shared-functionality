@@ -2,6 +2,8 @@
 namespace SIM\FAMILY;
 use SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 // Adds family values to the default values of a form
 add_filter('sim_forms_load_userdata', __NAMESPACE__.'\addFamilyData', 10, 2);
 function addFamilyData($usermeta, $userId){

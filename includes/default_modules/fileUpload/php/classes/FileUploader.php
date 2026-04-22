@@ -2,6 +2,8 @@
 namespace SIM\FILEUPLOAD;
 use SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class FileUploader{
     public $fileParam;
     public $maxSize;

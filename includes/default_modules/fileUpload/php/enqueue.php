@@ -2,6 +2,8 @@
 namespace SIM\FILEUPLOAD;
 use SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 add_action( 'wp_enqueue_scripts', __NAMESPACE__.'\registerUploadScripts', 1);
 
 function registerUploadScripts(){

@@ -1,6 +1,8 @@
 <?php
 namespace SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class UserPageLinks {
 	public $foundUsers;
 	public $string;

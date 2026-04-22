@@ -168,6 +168,7 @@ function getTemplateFile($template, $type, $name=''){
 	}else{
 		$baseDir		= WP_PLUGIN_DIR;
 	}
+	
 	$templateFile	= '';
 
 	//check what we are dealing with

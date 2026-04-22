@@ -2,6 +2,8 @@
 namespace SIM\ADMIN;
 use SIM;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 //load js and css
 add_action( 'admin_enqueue_scripts', __NAMESPACE__.'\loadAdminAssets');
 function loadAdminAssets($hook) {
@@ -10,8 +12,8 @@ function loadAdminAssets($hook) {
 		return;
 	}
 
-	wp_enqueue_style('sim_admin_css', plugins_url('css/admin.min.css', __DIR__), array(), SIM\PLUGINVERSION);
-	wp_enqueue_script('sim_admin_js', plugins_url('js/admin.min.js', __DIR__), array() , SIM\PLUGINVERSION, true);
+	wp_enqueue_style('sim_admin_css', plugins_url('css/admin.min.css', __DIR__), array(), PLUGINVERSION);
+	wp_enqueue_script('sim_admin_js', plugins_url('js/admin.min.js', __DIR__), array() , PLUGINVERSION, true);
 
 	wp_localize_script( 'sim_admin_js',
 		'sim',
