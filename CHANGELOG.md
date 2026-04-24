@@ -23,6 +23,7 @@
 - heartbeat issues
 - show submenu new admin class
 - tab id in url
+- ignore non-active tsjippy plugins
 
 ### Updated
 
