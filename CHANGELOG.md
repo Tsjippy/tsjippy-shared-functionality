@@ -22,6 +22,7 @@
 ### Fixed
 - heartbeat issues
 - show submenu new admin class
+- tab id in url
 
 ### Updated
 
