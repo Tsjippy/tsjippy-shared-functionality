@@ -5,12 +5,16 @@
 			"path": "."
 		},
 		{
-			"name": "sim-modules",
-			"path": "../../sim-modules"
-		},
-		{
 			"name": "simnigeria",
 			"path": "../../.."
+		},
+		{
+			"name": "tsjippy-captcha",
+			"path": "../tsjippy-captcha"
+		},
+		{
+			"name": "sim-modules",
+			"path": "../../sim-modules"
 		}
 	],
 	"settings": {},
