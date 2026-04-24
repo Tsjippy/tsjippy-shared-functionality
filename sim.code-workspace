@@ -5,16 +5,20 @@
 			"path": "."
 		},
 		{
-			"name": "simnigeria",
-			"path": "../../.."
-		},
-		{
 			"name": "tsjippy-captcha",
 			"path": "../tsjippy-captcha"
 		},
 		{
 			"name": "sim-modules",
 			"path": "../../sim-modules"
+		},
+		{
+			"name": "tsjippy-comments",
+			"path": "../tsjippy-comments"
+		},
+		{
+			"name": "simnigeria",
+			"path": "../../.."
 		}
 	],
 	"settings": {},
