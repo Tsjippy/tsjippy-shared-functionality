@@ -18,6 +18,7 @@
 - preparing for sub-plugin
 - code reorder
 - from style_version to pluginversion
+- sim to tsjippy
 
 ### Fixed
 - heartbeat issues
