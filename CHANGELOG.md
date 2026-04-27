@@ -19,6 +19,7 @@
 - code reorder
 - from style_version to pluginversion
 - sim to tsjippy
+- css selectors
 
 ### Fixed
 - heartbeat issues
