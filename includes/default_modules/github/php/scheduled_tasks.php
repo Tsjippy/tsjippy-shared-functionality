@@ -16,7 +16,7 @@ function scheduleTasks(){
 
 function checkForPluginUpdates(){
 
-	// DO not run on localhost
+	// Do not run on localhost
 	if(wp_get_environment_type() === 'local'){
 		return;
 	}
@@ -24,7 +24,7 @@ function checkForPluginUpdates(){
 	// update the plugin first
 	$url    = self_admin_url( 'update.php?action=upgrade-plugin&plugin=' . urlencode( TSJIPPY\PLUGINNAME ) );
     $url    = wp_nonce_url( $url, 'bulk-update-plugins' );
-	$page 	= file_get_contents($url);
+	file_get_contents($url);
 
 	// Now check for module updates
 	$github	= new Github();
@@ -34,7 +34,7 @@ function checkForPluginUpdates(){
 			continue;
         }
 
-		$slug   	= basename($plugin, '.php');
+		$slug   	= str_replace('tsjippy-', '', basename($plugin, '.php'));
 		$nameSpace	= strtoupper($slug);
 
 		// inactive module
@@ -66,3 +66,7 @@ function checkForPluginUpdates(){
         }
 	}
 }
+
+add_action('init', function(){
+	checkForPluginUpdates();
+});

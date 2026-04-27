@@ -37,6 +37,7 @@ if(!isset($_SERVER['HTTP_SEC_FETCH_DEST'])){
 define(__NAMESPACE__ .'\PLUGIN', plugin_basename(__FILE__));
 define(__NAMESPACE__ .'\PLUGINPATH', __DIR__);
 define(__NAMESPACE__ .'\PLUGINSLUG', basename(__FILE__, '.php'));
+define(__NAMESPACE__ .'\SETTINGS', get_option('tsjippy_settings', []));
 
 $files = glob(__DIR__  . '/*.php');
 foreach ($files as $file) {

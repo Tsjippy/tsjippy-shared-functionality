@@ -414,7 +414,7 @@
 
 
 ### Changed
-- sim_module_updated filter to new format
+- tsjippy_module_updated filter to new format
 
 ## [5.2.9] - 2025-02-10
 

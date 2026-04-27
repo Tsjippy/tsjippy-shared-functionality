@@ -6,6 +6,8 @@ use Github\Client;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+require( TSJIPPY\PLUGINPATH  . '/includes/default_modules/github/lib/vendor/autoload.php');
+
 // https://github.com/KnpLabs/php-github-api 	-- github api
 // https://github.com/michelf/php-markdown		-- convert markdown to html
 
@@ -40,7 +42,7 @@ add_filter( 'pre_set_site_transient_update_plugins', __NAMESPACE__.'\showPluginU
 function showPluginUpdate($transient){
 	$github			= new Github();
 
-	$item			= $github->getVersionInfo(TSJIPPY\PLUGIN_PATH);
+	$item			= $github->getVersionInfo(TSJIPPY\PLUGINPATH);
 
 	if(!is_object($item)){
 		return $transient;
@@ -55,3 +57,5 @@ function showPluginUpdate($transient){
 
 	return $transient;
 }
+
+define(__NAMESPACE__ .'\SETTINGS', get_option('tsjippy_github_settings', []));

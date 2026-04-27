@@ -4,7 +4,7 @@ use TSJIPPY;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class AdminMenu{
+class MainAdminMenu{
     public $tab;
     public $tabLinkButtonsWrapper;
     public $mainDiv;
@@ -24,6 +24,18 @@ class AdminMenu{
 
         // Register a custom menu page.
         add_menu_page("Tsjippy Plugin Settings", "Tsjippy Settings", 'edit_others_posts', "tsjippy", [$this, "mainMenu"]);
+
+        // Sub menu for Github
+        add_submenu_page(
+            'tsjippy', 
+            'Github', 
+            'Github', 
+            "edit_others_posts", 
+            'github', 
+            function(){
+                $this->buildSubMenu('Github', 'github');
+            }
+        );
 
         foreach(wp_get_active_and_valid_plugins() as $plugin){
 

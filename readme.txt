@@ -23,7 +23,7 @@ This is the base module with code all other sim plugins depend on.
 - [Default pictures](https://github.com/Tsjippy/defaultpictures)        Define default pictures for new content if not set
 - [Embed page](https://github.com/Tsjippy/embedpage)                    Embed a post in another post
 - [Events](https://github.com/Tsjippy/events)                           Display (recurring) events on a calendar and feed
-- [Html email](https://github.com/Tsjippy/fancyemail)                   Auto create nice looking e-mails
+- [Html email](https://github.com/Tsjippy/htmlemail)                    Auto create nice looking e-mails
 - [Forms](https://github.com/Tsjippy/forms)                             Advanced formbuilder
 - [Frontend posting](https://github.com/Tsjippy/frontendposting)        Create content from the frontend
 - [Heic to jpeg](https://github.com/Tsjippy/heictojpeg)                 Auto convert heic to jpeg

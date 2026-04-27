@@ -1,6 +1,6 @@
 @use 'global' as *;
 
-.sim-table{
+.tsjippy table{
 	border: 1px solid black;
 	text-align: center !important;
 
@@ -204,17 +204,17 @@
 
 /* Mobile settings*/
 @media screen and (max-width: 800px){
-	.sim-table thead {
+	.tsjippy table thead {
 		display: none;
 	}
 	
-	.sim-table td::before{
+	.tsjippy table td::before{
 		content: attr(label);
 		font-weight: bold;
 		margin-right: 10px;
 	}
 	
-	.sim-table td, .sim-table td.sticky{
+	.tsjippy table td, .tsjippy table td.sticky{
 		display: flex;
 		flex-wrap: wrap;
 		max-width: calc( 100vw - 15px);
