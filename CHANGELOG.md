@@ -20,6 +20,7 @@
 - from style_version to pluginversion
 - sim to tsjippy
 - css selectors
+- PLUGINCONSTANT value
 
 ### Fixed
 - heartbeat issues
