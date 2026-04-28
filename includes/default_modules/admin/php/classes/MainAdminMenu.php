@@ -16,8 +16,8 @@ class MainAdminMenu{
      */
     public function __construct() {
         $this->tab      = 'settings';
-        if(isset($_GET['tab'])){
-            $this->tab  = sanitize_key($_GET['tab']);
+        if(isset($_GET['main-tab'])){
+            $this->tab  = sanitize_key($_GET['main-tab']);
         }
 
         $this->dom		= new \DOMDocument();
