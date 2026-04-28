@@ -1,4 +1,4 @@
-import {changeUrl, displayTab} from './../../../../includes/js/partials/tabs.js'
+import {switchTab, changeUrl, displayTab} from './../../../../includes/js/partials/tabs.js'
 import {showModal} from './../../../../includes/js/partials/modals.js'
 import {fetchRestApi} from  './../../../../includes/js/partials/form_submit_functions.js'
 import { showLoader } from  './../../../../includes/js/partials/show_loader.js';

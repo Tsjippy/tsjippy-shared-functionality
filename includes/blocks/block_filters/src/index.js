@@ -35,7 +35,7 @@ function addFilterAttribute(settings) {
  
 wp.hooks.addFilter(
     'blocks.registerBlockType',
-    'sim/block-filter-attribute',
+    'tsjippy/block-filter-attribute',
     addFilterAttribute
 );
 
@@ -284,6 +284,6 @@ const blockFilterControls = createHigherOrderComponent((BlockEdit) => {
  
 wp.hooks.addFilter(
     'editor.BlockEdit',
-    'sim/block-filter-controls',
+    'tsjippy/block-filter-controls',
     blockFilterControls
 );

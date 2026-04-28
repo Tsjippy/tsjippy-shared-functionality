@@ -27,7 +27,7 @@ function getClassFiles(){
 
         $nameSpace  = strtoupper(str_replace(['tsjippy-', '-'], '', basename(dirname(dirname(dirname($file))))));
 
-        if($nameSpace == 'includes'){
+        if($nameSpace == 'INCLUDES'){
             $nameSpace = 'TSJIPPY';
         }
 

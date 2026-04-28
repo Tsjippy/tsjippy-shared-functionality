@@ -36,7 +36,7 @@ if(!isset($_SERVER['HTTP_SEC_FETCH_DEST'])){
 //remove_action( 'wp_head', 'adjacent_posts_rel_link');
 define(__NAMESPACE__ .'\PLUGIN', plugin_basename(__FILE__));
 define(__NAMESPACE__ .'\PLUGINPATH', __DIR__);
-define(__NAMESPACE__ .'\PLUGINSLUG', basename(__FILE__, '.php'));
+define(__NAMESPACE__ .'\PLUGINSLUG', str_replace('tsjippy-', '', basename(__FILE__, '.php')));
 define(__NAMESPACE__ .'\SETTINGS', get_option('tsjippy_settings', []));
 
 $files = glob(__DIR__  . '/*.php');

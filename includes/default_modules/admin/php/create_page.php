@@ -7,37 +7,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  *
  * Creates a default page if it does not exist yet
+ * 
+ * @param   string      $title      The title of the page
+ * @param   string      $content    The page content
+ * @param   array       $arg        Extra page creation arguments, default empty
+ * 
+ * @return  int                     The id of the created page
  */
-function createDefaultPage($options, $optionKey, $title, $content, $oldOptions, $arg=[]){
-
-    // Only create if it does not yet exist
-    if(empty($oldOptions[$optionKey]) || !is_array($oldOptions[$optionKey])){
-        $pages  = [];
-    }else{
-        $pages  = $oldOptions[$optionKey];
-    }
-
-    if(is_array($pages)){
-        $processed  = [];
-        foreach($pages as $key=>$pageId){
-			if(
-                get_post_status($pageId) != 'publish' ||                                // not a published page
-                !str_contains(get_the_content(null, false, $pageId), $content) ||       // not the right content
-                in_array($pageId, $processed)                                           // dublicate
-            ){
-				unset($pages[$key]);
-			}
-
-            $processed[]    = $pageId;
-		}
-
-        $options[$optionKey]    = $pages;
-
-        if(!empty($pages)){
-            return $options;
-        }
-    }
-
+function createDefaultPage($title, $content, $arg=[]){
     // Create the page
     $post = array(
         'post_type'		=> 'page',
@@ -52,22 +29,19 @@ function createDefaultPage($options, $optionKey, $title, $content, $oldOptions, 
         $post   = array_merge($post, $arg);
     }
     $pageId 	= wp_insert_post( $post, true, false);
-    $pages[]    = $pageId;
 
-    //Store page id in plugin options
-    $options[$optionKey]	= $pages;
 
     // Do not require page updates
     update_post_meta($pageId, 'static_content', true);
     
-    return $options;
+    return $pageId;
 }
 
 /**
  * Checks if all pages are valid in the default pages option array and returns the first valid one as a link
  *
  * @param   string  $slug           The slug of the plugin
- * @param   string  $optionKey      The key in the plugin option array
+ * @param   string  $optionKey      The key in the plugin settings
  *
  * @return  string                  The url
  */

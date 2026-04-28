@@ -113,7 +113,7 @@ def get_websiteinfo(command):
     try:
         print_to_log("Trying to get a result for command "+command)
 
-        url = "https://YOURURL/wp-json/sim/v2/"+command
+        url = "https://YOURURL/wp-json/tsjippy/v2/"+command
         verify = True
         # verify = False
         USERNAME = USERNAME

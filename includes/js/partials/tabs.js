@@ -40,7 +40,7 @@ export function switchTab(event=null){
 
     if(mainTab != null){
         //find the tab and display it
-        document.querySelectorAll(`[data-param-val="${mainTab}"]:not(.active)`).forEach(tabbutton=>{
+        document.querySelectorAll(`[data-target="${mainTab}"]:not(.active)`).forEach(tabbutton=>{
             //only process non-modal tabs
             if(tabbutton.closest('.modal') == null){
                 let result	= displayTab(tabbutton);
@@ -54,7 +54,7 @@ export function switchTab(event=null){
     let secondTab = params.second_tab;
     if(secondTab != null){
         //find the tab and display it
-        document.querySelectorAll(`[data-param-val="${secondTab}"]:not(.active)`).forEach(tabbutton=>{
+        document.querySelectorAll(`[data-target="${secondTab}"]:not(.active)`).forEach(tabbutton=>{
             displayTab(tabbutton);
         });
     }
