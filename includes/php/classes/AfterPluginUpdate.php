@@ -35,5 +35,5 @@ abstract class AfterPluginUpdate {
         }
     }
 
-    abstract public function afterPluginUpdate($slug, $oldVersion);
+    abstract public function afterPluginUpdate($oldVersion);
 }

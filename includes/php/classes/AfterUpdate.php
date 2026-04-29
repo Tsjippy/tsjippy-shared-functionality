@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class AfterUpdate extends AfterPluginUpdate {
 
-    public function afterPluginUpdate($slug, $oldVersion){
+    public function afterPluginUpdate($oldVersion){
         global $wpdb;
 
         printArray('Running update actions');

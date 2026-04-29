@@ -16,6 +16,6 @@ add_action( 'schedule_tsjippy_plugin_update_action', function($slug, $oldVersion
     // Run update actions for this plugin if it exists
     if(class_exists($className)){
         $afterUpdate            = new $className();
-        $afterUpdate->afterPluginUpdate( $slug, $oldVersion );
+        $afterUpdate->afterPluginUpdate( $oldVersion );
     }
 }, 10, 2 );

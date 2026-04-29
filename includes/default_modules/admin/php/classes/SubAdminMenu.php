@@ -102,18 +102,18 @@ abstract class SubAdminMenu{
 
         $this->settings	= $options;
 
-        $this->postSettingsSave();
+        $extraMessage   = $this->postSettingsSave();
 
         update_option("tsjippy_{$slug}_settings", $this->settings);
 
-        return "<div class='success'>Settings succesfully saved</div>";
+        return "<div class='success'>Settings succesfully saved $extraMessage</div>";
     }
 
     /**
      * Function to do extra actions after settings are saved
      */
     public function postSettingsSave(){
-        return;
+        return '';
     }
 
     /**

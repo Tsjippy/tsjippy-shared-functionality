@@ -44,8 +44,34 @@ foreach ($files as $file) {
     require_once($file);
 }
 
+// run on activation
+add_action( 'activated_plugin', function ( $plugin ) {
+    if( $plugin != PLUGIN ) {
+        return;
+    }
+
+    // Create private upload folder
+    $path   = wp_upload_dir()['basedir'].'/private';
+    if (!is_dir($path)) {
+        wp_mkdir_p($path);
+    }
+    
+    $family = new FAMILY\Family();
+    $family->createDbTables();
+
+    // Redirect to settings page after plugin activation
+    exit( esc_url(wp_safe_redirect( admin_url( esc_url('admin.php?page=tsjippy') ) ) ) );
+} );
+
 //Register a function to run on plugin deactivation
 register_deactivation_hook( __FILE__, __NAMESPACE__.'\onDeactivation');
 function onDeactivation() {
 	wp_clear_scheduled_hook( 'update_plugin_action' );
 }
+
+add_action( 'activated_plugin', function($plugin){
+	// Redirect to settings page after plugin activation
+    if($plugin == PLUGIN && wp_safe_redirect( esc_url(admin_url('admin.php?page=tsjippy') )  ) ){
+		exit();
+	}
+});
