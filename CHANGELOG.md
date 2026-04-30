@@ -2,7 +2,7 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
-- activate a plugin after downloading  Co-authored-by: Copilot <copilot@github.com>
+- activate a plugin after downloading 
 
 ### Changed
 
@@ -35,7 +35,7 @@
 - css selectors
 - PLUGINCONSTANT value
 - recurrence selector code
-- download from github code changes  Co-authored-by: Copilot <copilot@github.com>
+- download from github code changes
 
 ### Fixed
 - heartbeat issues
