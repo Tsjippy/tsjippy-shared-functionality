@@ -35,7 +35,7 @@ if(!isset($_SERVER['HTTP_SEC_FETCH_DEST'])){
 //only call it once
 //remove_action( 'wp_head', 'adjacent_posts_rel_link');
 define(__NAMESPACE__ .'\PLUGIN', plugin_basename(__FILE__));
-define(__NAMESPACE__ .'\PLUGINPATH', __DIR__);
+define(__NAMESPACE__ .'\PLUGINPATH', __DIR__.'/');
 define(__NAMESPACE__ .'\PLUGINSLUG', str_replace('tsjippy-', '', basename(__FILE__, '.php')));
 define(__NAMESPACE__ .'\SETTINGS', get_option('tsjippy_settings', []));
 
@@ -56,6 +56,8 @@ add_action( 'activated_plugin', function ( $plugin ) {
         wp_mkdir_p($path);
     }
     
+    require_once(PLUGINPATH.'/includes/default_modules/family/php/classes/Family.php');
+
     $family = new FAMILY\Family();
     $family->createDbTables();
 
