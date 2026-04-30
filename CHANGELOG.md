@@ -2,13 +2,18 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
-- activate a plugin after downloading  Co-authored-by: Copilot <copilot@github.com>
 
 ### Changed
 
 ### Fixed
 
 ### Updated
+
+## [10.0.2] - 2026-04-30
+
+
+### Added
+- activate a plugin after downloading  Co-authored-by: Copilot <copilot@github.com>
 
 ## [10.0.0] - 2026-04-30
 
