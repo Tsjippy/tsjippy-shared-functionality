@@ -2,6 +2,17 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
+
+### Changed
+
+### Fixed
+
+### Updated
+
+## [10.0.0] - 2026-04-30
+
+
+### Added
 - adminmenu class
 - if ( ! defined( 'ABSPATH' ) ) exit; safety
 - if ( ! defined( 'ABSPATH' ) ) exit;
@@ -23,6 +34,7 @@
 - css selectors
 - PLUGINCONSTANT value
 - recurrence selector code
+- download from github code changes  Co-authored-by: Copilot <copilot@github.com>
 
 ### Fixed
 - heartbeat issues
@@ -30,8 +42,6 @@
 - tab id in url
 - ignore non-active tsjippy plugins
 - main tab
-
-### Updated
 
 ## [6.0.6] - 2026-03-04
 
