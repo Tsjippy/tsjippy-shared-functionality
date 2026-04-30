@@ -2,13 +2,18 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
-- activate a plugin after downloading 
 
 ### Changed
 
 ### Fixed
 
 ### Updated
+
+## [6.0.8] - 2026-04-30
+
+
+### Added
+- activate a plugin after downloading 
 
 ## [10.0.2] - 2026-04-30
 
