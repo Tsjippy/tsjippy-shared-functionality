@@ -23,6 +23,7 @@
 - css selectors
 - PLUGINCONSTANT value
 - recurrence selector code
+- download from github code changes  Co-authored-by: Copilot <copilot@github.com>
 
 ### Fixed
 - heartbeat issues
