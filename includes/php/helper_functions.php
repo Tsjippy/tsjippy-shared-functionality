@@ -1367,7 +1367,7 @@ function addRawHtml($html, $parent, $position='beforeEnd'){
 		return false;
 	}
 	
-	$html		= trim(force_balance_tags($html));
+	$html			= trim(force_balance_tags($html));
 
 	$tempDom 		= new \DOMDocument();
 	$tempDom->loadHTML($html);
