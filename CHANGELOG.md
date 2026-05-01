@@ -8,6 +8,7 @@
 
 ### Fixed
 - after update actions
+- version compare
 
 ### Updated
 
