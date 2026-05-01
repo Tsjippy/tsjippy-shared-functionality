@@ -70,7 +70,7 @@ add_action( 'activated_plugin', function ( $plugin ) {
         $_REQUEST['bulk_action'] ?? '' != 'Apply' &&
         $_REQUEST['action'] ?? '' == 'activate'
     ){
-        exit( esc_url(wp_safe_redirect( admin_url( esc_url('admin.php?page=tsjippy') ) ) ) );
+        exit( wp_safe_redirect( admin_url( esc_url('admin.php?page=tsjippy') ) ) );
     }
 } );
 
