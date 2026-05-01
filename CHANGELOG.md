@@ -7,6 +7,7 @@
 - updated github workflow versions
 
 ### Fixed
+- upgrade options
 
 ### Updated
 
