@@ -39,20 +39,34 @@ function customDescription( $res, $action, $args ) {
  * Checks and shows plugin updates from github
  */
 add_filter( 'pre_set_site_transient_update_plugins', __NAMESPACE__.'\showPluginUpdate');
+/**
+ * Adds updates to the site transient for all Tsjippy plugins
+ * @param mixed $transient  Transient name. Expected to not be SQL-escaped. Must be 167 characters or fewer in length.
+ */
 function showPluginUpdate($transient){
 	$github			= new Github();
 
-	$item			= $github->getVersionInfo(TSJIPPY\PLUGINPATH);
+	/**
+	 * Check for plugin updates for each of the tsjippy plugins
+	 */
+	foreach(wp_get_active_and_valid_plugins() as $plugin){
+		// Only add submenu for tsjippy plugins
+		if( strpos($plugin, 'tsjippy-') === false ){
+			continue;
+		}
 
-	if(!is_object($item)){
-		return $transient;
-	}
+		$item			= $github->getVersionInfo($plugin);
 
-	// Git has a newer version
-	if(isset($item->new_version)){
-		$transient->response[TSJIPPY\PLUGIN]	= $item;
-	}else{
-		$transient->no_update[TSJIPPY\PLUGIN]	= $item;
+		if(!is_object($item)){
+			return $transient;
+		}
+
+		// Git has a newer version
+		if(isset($item->new_version)){
+			$transient->response[plugin_basename($plugin)]	= $item;
+		}else{
+			$transient->no_update[plugin_basename($plugin)]	= $item;
+		}
 	}
 
 	return $transient;

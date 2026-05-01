@@ -283,7 +283,7 @@ class MainAdminMenu{
         array_unshift($links, $link);
 
         //TO DO: implement Pro
-        $pro = false;
+        $pro = true;
         if($pro){
 
             // Update links
