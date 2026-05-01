@@ -6,6 +6,7 @@
 ### Changed
 
 ### Fixed
+- check for plugin updates  Co-authored-by: Copilot <copilot@github.com>
 
 ### Updated
 
