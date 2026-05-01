@@ -5,6 +5,7 @@
 
 ### Changed
 - updated github workflow versions
+- only redirect on activation when needed
 
 ### Fixed
 - upgrade options
