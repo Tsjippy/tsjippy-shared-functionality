@@ -4,6 +4,7 @@
 ### Added
 
 ### Changed
+- exclude .vscode from releases
 
 ### Fixed
 
