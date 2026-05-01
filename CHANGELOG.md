@@ -2,6 +2,17 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
+
+### Changed
+
+### Fixed
+
+### Updated
+
+## [10.0.4] - 2026-05-01
+
+
+### Added
 - update check for all tsjippy plugins
 
 ### Changed
@@ -10,8 +21,6 @@
 ### Fixed
 - after update actions
 - version compare
-
-### Updated
 
 ## [10.0.3] - 2026-04-30
 
