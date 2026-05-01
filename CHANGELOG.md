@@ -2,6 +2,7 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
+- update check for all tsjippy plugins
 
 ### Changed
 - exclude .vscode from releases
