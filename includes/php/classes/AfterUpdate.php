@@ -12,7 +12,7 @@ class AfterUpdate extends AfterPluginUpdate {
 
         error_log("Old Version is $oldVersion");
 
-        if(version_compare('10.0.0', $oldVersion) === 1){
+        if(version_compare('10.0.0', $oldVersion) === 1 || get_option('sim_modules')){
             $github = new GITHUB\Github();
 
             /**
@@ -55,6 +55,8 @@ class AfterUpdate extends AfterPluginUpdate {
                 $newName    = str_replace('_sim_', '_tsjippy_', $table);
                 $wpdb->query("ALTER TABLE $table RENAME TO $newName");
             }
+
+            delete_option('sim_modules');
         }
     }
 }
