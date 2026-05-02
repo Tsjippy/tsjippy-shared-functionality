@@ -113,8 +113,6 @@ f.close()
 print('::debug::😩 Attempting a workaround for the "dubious ownership" git error')
 run_command(["git", "config", "--global", "--add", "safe.directory", "/github/workspace"])
 
-files = []
-
 # Create Github object
 github = Github(base_url=os.environ['GITHUB_API_URL'],
                 login_or_token=os.environ['GITHUB_TOKEN'],
@@ -131,68 +129,19 @@ try:
 except UnknownObjectException:
     release = None
 
-body = newTotal
 if release is not None:
     print("👌 Release found, copying missing input data")
 else:
     print("❗ Release does not exists (yet)")
-    if body is None:
-        print("::error::Input parameter 'body' must be passed if the release does not exist")
+    if newTotal is None:
+        print("::error::Input parameter 'newTotal' must be passed if the release does not exist")
         exit(1)
 
-print("::group::📦 Creating/Updating the release...")
 if release is not None:
     print("📝 Updating data...")
-    release.update_release(tag_name, body)
-
-    if len(files) > 0:
-        print("📨 Uploading new assets...")
-        for file in files:
-            for retry in range(1, 4):
-                try:
-                    release.upload_asset(file)
-                    print(f"✅ Uploaded {file}")
-                    break
-                except (requests.exceptions.ConnectionError, GithubException) as e:
-                    if isinstance(e, GithubException) and e.status != 422:
-                        raise
-                    if retry < 3:
-                        print(f"::warning::⚠️ Got a connection error while trying to upload asset {file} "
-                              f"(attempt {retry}), retrying. Error details: {type(e).__name__}: {e}")
-                        time.sleep(2)
-                        for asset in release.get_assets():
-                            if asset.name == os.path.basename(file):
-                                print(f"🗑 Deleting duplicate asset {asset.name}")
-                                asset.delete_asset()
-                    else:
-                        print(f"::error::❌ Could not upload asset {file} due to connection errors! "
-                              f"Error details: {type(e).__name__}: {e}")
-                        raise
+    release.update_release(tag_name, newTotal)
 else:
     print("📝 Creating new release...")
-    release = repo.create_git_release(tag_name, tag_name, body)
-    if len(files) > 0:
-        print("📨 Uploading assets...")
-        for file in files:
-            for retry in range(1, 4):
-                try:
-                    release.upload_asset(file)
-                    print(f"✅ Uploaded {file}")
-                    break
-                except (requests.exceptions.ConnectionError, GithubException) as e:
-                    if isinstance(e, GithubException) and e.status != 422:
-                        raise
-                    if retry < 3:
-                        print(f"::warning::⚠️ Got a connection error while trying to upload asset {file} "
-                              f"(attempt {retry}), retrying. Error details: {type(e).__name__}: {e}")
-                        time.sleep(2)
-                        for asset in release.get_assets():
-                            if asset.name == os.path.basename(file):
-                                print(f"🗑 Deleting duplicate asset {asset.name}")
-                                asset.delete_asset()
-                    else:
-                        print(f"::error::❌ Could not upload asset {file} due to connection errors! "
-                              f"Error details: {type(e).__name__}: {e}")
-                        raise
+    release = repo.create_git_release(tag_name, tag_name, newTotal)
 print("::endgroup::")
 print("👌😎 Release created!")
