@@ -6,9 +6,14 @@
 ### Changed
 
 ### Fixed
-- error when error when downloading plugin  Co-authored-by: Copilot <copilot@github.com>
 
 ### Updated
+
+## [10.0.7] - 2026-05-02
+
+
+### Fixed
+- error when error when downloading plugin  Co-authored-by: Copilot <copilot@github.com>
 
 ## [10.0.6] - 2026-05-01
 
