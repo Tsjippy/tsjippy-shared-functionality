@@ -7,6 +7,7 @@
 
 ### Fixed
 - Testing relaeses Fixed
+- on release github flow
 
 ### Updated
 - Testing relaeses Updates
