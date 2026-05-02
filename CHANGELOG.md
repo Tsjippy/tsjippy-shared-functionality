@@ -9,6 +9,12 @@
 
 ### Updated
 
+## [10.0.6] - 2026-05-01
+
+
+### Fixed
+- check for plugin updates  Co-authored-by: Copilot <copilot@github.com>
+
 ## [10.0.5] - 2026-05-01
 
 
