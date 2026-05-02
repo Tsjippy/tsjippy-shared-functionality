@@ -9,6 +9,7 @@
 ### Fixed
 - Testing relaeses Fixed
 - on release github flow
+- string literal erroe in pattern string
 
 ### Updated
 - Testing relaeses Updates
