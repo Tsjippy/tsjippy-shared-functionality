@@ -1,5 +1,4 @@
 import re
-import sys
 from pathlib import Path
 import datetime
 import requests.exceptions
@@ -7,7 +6,6 @@ from github import Github
 from github.GithubException import GithubException, UnknownObjectException
 import os
 import os.path
-import glob
 import time
 import subprocess
 import secrets

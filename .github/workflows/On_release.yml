@@ -11,6 +11,9 @@ jobs:
 
         - uses: actions/setup-node@v6
 
+        - name: Install dependencies
+          run: sudo pip3 install PyGithub
+
         - name: Update version
           env: 
             RELEASE_ID: ${{ github.event.release.id }}
