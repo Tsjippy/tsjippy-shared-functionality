@@ -14,14 +14,14 @@ jobs:
         - name: Install dependencies
           run: sudo pip3 install PyGithub
 
-        - name: Update version
+        - name: Update Plugin Version
           env: 
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             RELEASE_TAG: ${{ github.event.release.name }}
             PLUGIN: ${{ github.event.repository.name }}
           run: python ./.github/workflows/update_version.py
 
-        - name: Update wp plugin version
+        - name: Commit wp plugin version Update
           uses: test-room-7/action-update-file@v2
           env: 
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
