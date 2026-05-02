@@ -78,12 +78,12 @@ try:
 
     # Remove empty sections
     for x in ["Added", "Changed", "Fixed", "Updated"]:
-        pattern = r'(### '+x+'[\s\S]*'
+        pattern = r'(### ' + x + r'[\s\S]*'
 
         if(x != 'Updated'):
-            pattern = pattern+'?)###'
+            pattern = pattern + '?)###'
         else:
-            pattern = pattern+')'
+            pattern = pattern + ')'
 
         added   = re.search(pattern, total).group(1)
 
