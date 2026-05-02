@@ -2,9 +2,9 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
+- Auto creation of release description
 
 ### Changed
-- finalizing on release workflow
 
 ### Fixed
 
