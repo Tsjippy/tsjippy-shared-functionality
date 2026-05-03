@@ -11,8 +11,25 @@ jobs:
 
         - uses: actions/setup-node@v6
 
-        - name: Update file
-          run: python ./.github/workflows/update_changelog.py "${{ github.event.commits[0].message }}"
+        - name: Install dependencies
+          run: sudo pip3 install PyGithub
+
+        - name: Get the python File
+          uses: actions/checkout@v6
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            repository: tsjippy/shared-functionality
+            path: scripts
+            sparse-checkout: |
+              .github/workflows/update_changelog.py
+            sparse-checkout-cone-mode: false
+
+        - name: Update Changelog
+          env: 
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            PLUGIN: ${{ github.event.repository.name }}
+          run: python scripts/.github/workflows/update_changelog.py "${{ github.event.commits[0].message }}"
 
         - name: Commit file
           uses: test-room-7/action-update-file@v2
