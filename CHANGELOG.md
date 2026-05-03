@@ -4,6 +4,7 @@
 ### Added
 
 ### Changed
+- add github token to constructor
 
 ### Fixed
 
