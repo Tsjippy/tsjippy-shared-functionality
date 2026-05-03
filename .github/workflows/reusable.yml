@@ -14,12 +14,23 @@ jobs:
         - name: Install dependencies
           run: sudo pip3 install PyGithub
 
+        - name: Get the python File
+          uses: actions/checkout@v6
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            repository: tsjippy/shared-functionality
+            sparse-checkout: |
+              .github/workflows/update_version.py
+              update_version.py
+            sparse-checkout-cone-mode: false
+
         - name: Update version
           env: 
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             RELEASE_TAG: ${{ github.event.release.name }}
             PLUGIN: ${{ github.event.repository.name }}
-          run: python ./.github/workflows/update_version.py
+          run: python ./update_version.py
 
         - name: Update wp plugin version
           uses: test-room-7/action-update-file@v2

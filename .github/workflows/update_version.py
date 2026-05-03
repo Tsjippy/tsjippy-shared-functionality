@@ -51,6 +51,8 @@ plugin = os.environ['PLUGIN']
 
 print(plugin)
 
+print(os.environ['GITHUB_WORKSPACE'])
+
 # load plugin file
 txt = Path('tsjippy-' + plugin + '.php').read_text()
 
