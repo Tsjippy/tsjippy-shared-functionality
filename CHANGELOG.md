@@ -2,7 +2,6 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
-- reusable workflow  
 
 ### Changed
 
@@ -10,6 +9,11 @@
 
 ### Updated
 
+## [10.1.0] - 2026-05-03
+
+
+### Added
+- reusable workflow  
 
 ## [10.0.7] - 2026-05-02
 
