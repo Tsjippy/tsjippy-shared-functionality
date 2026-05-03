@@ -2,7 +2,7 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
-- reusable workflow  Co-authored-by: Copilot <copilot@github.com>
+- reusable workflow  
 
 ### Changed
 
@@ -15,13 +15,13 @@
 
 
 ### Fixed
-- error when error when downloading plugin  Co-authored-by: Copilot <copilot@github.com>
+- error when error when downloading plugin  
 
 ## [10.0.6] - 2026-05-01
 
 
 ### Fixed
-- check for plugin updates  Co-authored-by: Copilot <copilot@github.com>
+- check for plugin updates  
 
 ## [10.0.5] - 2026-05-01
 
@@ -32,7 +32,7 @@
 
 ### Fixed
 - upgrade options
-- ony redirec after activation if needed  Co-authored-by: Copilot <copilot@github.com>
+- ony redirec after activation if needed  
 
 ## [10.0.4] - 2026-05-01
 
