@@ -1,4 +1,4 @@
-  name: Re-usable Release Flow
+name: Re-usable Release Flow
 on:
   workflow_call:
 
@@ -20,10 +20,10 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             repository: tsjippy/shared-functionality
+            path: scripts
             sparse-checkout: |
               .github/workflows/update_version.py
             sparse-checkout-cone-mode: false
-            path: scripts
 
         - name: Update version
           env: 
