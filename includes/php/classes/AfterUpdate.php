@@ -21,7 +21,7 @@ class AfterUpdate extends AfterPluginUpdate {
             // Make sure we use the github token in the new plugin
             update_option('tsjippy_github_settings', $modules['github']);
 
-            $github = new GITHUB\Github();
+            $github = new GITHUB\Github($modules['github']['token'] ?? '');
 
             foreach($modules as $module => $settings){
                 error_log("Processing $module");

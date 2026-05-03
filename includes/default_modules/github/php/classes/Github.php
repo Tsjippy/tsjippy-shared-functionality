@@ -17,9 +17,9 @@ class Github{
     public $releases;
     public $contents;
 
-    public function __construct() {
+    public function __construct($token = '') {
         $this->client 	        = new \Github\Client(); 
-        $this->token            = '';   
+        $this->token            = $token;   
         $this->authenticated    = false; 
         /** @var \Github\Api\Repository $repo **/
         $this->repo             = $this->client->api('repo');
