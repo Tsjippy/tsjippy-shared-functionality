@@ -6,6 +6,7 @@
 ### Changed
 
 ### Fixed
+- destination folder name for plugins
 
 ### Updated
 
