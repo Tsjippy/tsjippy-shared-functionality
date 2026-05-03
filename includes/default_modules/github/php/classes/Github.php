@@ -129,6 +129,10 @@ class Github{
             return new WP_Error('Github', 'Path canot be empty');
         }
 
+        if(!str_starts_with($path, 'tsjippy-')){
+            $path	= 'tsjippy-' . $path;
+        }
+
         require_once(ABSPATH . 'wp-admin/includes/file.php');
         WP_Filesystem();
         global $wp_filesystem;

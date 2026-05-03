@@ -58,7 +58,7 @@ function updateOrDownloadPlugin($slug){
 	$github		= new TSJIPPY\GITHUB\Github();
 
 	$result		= $github->downloadFromGithub('Tsjippy', $slug, WP_PLUGIN_DIR.'/tsjippy-'.$slug, true);
-
+	
 	if(is_wp_error($result)){
 		echo "<div class='error'>".esc_attr($result->get_error_message())."</div>";
 
