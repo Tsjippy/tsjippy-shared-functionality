@@ -4,6 +4,7 @@
 ### Added
 
 ### Changed
+- always extract to a folder staring with tsjippy-
 
 ### Fixed
 
