@@ -6,6 +6,7 @@
 ### Changed
 
 ### Fixed
+- print error message on update
 
 ### Updated
 
