@@ -9,6 +9,12 @@
 
 ### Updated
 
+## [10.1.1] - 2026-05-03
+
+
+### Changed
+- always extract to a folder staring with tsjippy-
+
 ## [10.1.0] - 2026-05-03
 
 
