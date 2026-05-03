@@ -2,13 +2,21 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
-- Auto creation of release description
 
 ### Changed
 
 ### Fixed
 
 ### Updated
+
+## [10.0.9.3] - 2026-05-02
+
+
+### Added
+- Auto creation of release description
+
+### Changed
+- github workflow generalization
 
 ## [10.0.7] - 2026-05-02
 
