@@ -13,12 +13,15 @@ class AfterUpdate extends AfterPluginUpdate {
         error_log("Old Version is $oldVersion");
 
         if(version_compare('10.0.0', $oldVersion) === 1 || get_option('sim_modules')){
-            $github = new GITHUB\Github();
-
             /**
              * transfer module settings to option er plugin
              */
             $modules     = get_option('sim_modules', []);
+
+            // Make sure we use the github token in the new plugin
+            update_option('tsjippy_github_settings', $modules['github']);
+
+            $github = new GITHUB\Github();
 
             foreach($modules as $module => $settings){
                 error_log("Processing $module");
@@ -28,6 +31,8 @@ class AfterUpdate extends AfterPluginUpdate {
 
                     unset($settings['emails']);
                 }
+
+                unset($settings['enable']);
                 
                 update_option("tsjippy_{$module}_settings", $settings);
 
@@ -43,7 +48,7 @@ class AfterUpdate extends AfterPluginUpdate {
                 $result = $github->downloadFromGithub('Tsjippy', $module, WP_PLUGIN_DIR."/tsjippy-$module");
                 if(is_wp_error($result)){
                     printArray($result->get_error_message());
-                    continue;
+                    return;
                 }
 
                 // Activate
