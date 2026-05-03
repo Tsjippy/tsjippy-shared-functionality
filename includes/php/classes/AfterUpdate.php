@@ -47,6 +47,7 @@ class AfterUpdate extends AfterPluginUpdate {
                 }
 
                 // Activate
+                error_log("Activating $module plugin");
                 activate_plugin("tsjippy-$module/tsjippy-$module.php");
             }
 

@@ -44,7 +44,7 @@ jobs:
               github-token: ${{ secrets.GITHUB_TOKEN }}
               
         - name: Zip Folder
-          run: zip -r tsjippy-${{ github.event.repository.name }}.zip . -x ".git/*" ".github/*" "phpcs.xml" "composer.json" "composer.lock" ".gitignore" "signalbot.db" "SignalBot.py" "CHANGELOG.md" "README.md" "*.code-workspace" "*.cmd" ".vscode" "test.php"
+          run: zip -r tsjippy-${{ github.event.repository.name }}.zip . -x ".git/*" ".github/*" "scripts/*" "phpcs.xml" "composer.json" "composer.lock" ".gitignore" "signalbot.db" "SignalBot.py" "CHANGELOG.md" "README.md" "*.code-workspace" "*.cmd" ".vscode" "test.php"
 
         - name: Release
           uses: softprops/action-gh-release@v3
