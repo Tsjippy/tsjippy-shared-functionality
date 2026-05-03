@@ -42,7 +42,7 @@ class AfterUpdate extends AfterPluginUpdate {
                  */
                 $result = $github->downloadFromGithub('Tsjippy', $module, WP_PLUGIN_DIR."/tsjippy-$module");
                 if(is_wp_error($result)){
-                    printArray($result);
+                    printArray($result->get_error_message());
                     continue;
                 }
 
