@@ -6,9 +6,14 @@
 ### Changed
 
 ### Fixed
-- print error message on update
 
 ### Updated
+
+## [10.1.1.3] - 2026-05-03
+
+
+### Fixed
+- print error message on update
 
 ## [10.1.1.2] - 2026-05-03
 
