@@ -30,7 +30,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             RELEASE_TAG: ${{ github.event.release.name }}
             PLUGIN: ${{ github.event.repository.name }}
-          run: python ./update_version.py
+          run: python update_version.py
 
         - name: Update wp plugin version
           uses: test-room-7/action-update-file@v2
