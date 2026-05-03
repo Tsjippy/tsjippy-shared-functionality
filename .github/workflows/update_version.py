@@ -52,7 +52,7 @@ plugin = os.environ['PLUGIN']
 print(plugin)
 
 # load plugin file
-txt = Path(plugin + '.php').read_text()
+txt = Path('tsjippy-' + plugin + '.php').read_text()
 
 # get old version
 try:
@@ -64,7 +64,7 @@ except Exception as e:
 txt = txt.replace(oldVersion, tag_name)
 
 # Write changes
-f = open(plugin + '.php', "w")
+f = open('tsjippy-' + plugin + '.php', "w")
 f.write(txt)
 f.close()
 

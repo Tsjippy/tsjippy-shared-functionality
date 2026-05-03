@@ -27,7 +27,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
               file-path: |
-                ${{ github.event.repository.name }}.php
+                tsjippy-${{ github.event.repository.name }}.php
                 CHANGELOG.md
               commit-msg: Update wp plugin version
               github-token: ${{ secrets.GITHUB_TOKEN }}
