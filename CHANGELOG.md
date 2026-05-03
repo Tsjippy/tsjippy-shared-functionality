@@ -6,9 +6,14 @@
 ### Changed
 
 ### Fixed
-- destination folder name for plugins
 
 ### Updated
+
+## [10.1.1.2] - 2026-05-03
+
+
+### Fixed
+- destination folder name for plugins
 
 ## [10.1.1.1] - 2026-05-03
 
