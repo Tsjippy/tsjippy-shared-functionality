@@ -18,19 +18,66 @@ class AfterUpdate extends AfterPluginUpdate {
              */
             $modules     = get_option('sim_modules', []);
 
-            $modules['content-filter']  = $modules['contentfilter'];
-            $modules['default-pictures']  = $modules['defaultpictures'];
-            $modules['embed-page']  = $modules['embedpage'];
-            $modules['html-email']  = $modules['fancyemail'];
-            $modules['frontend-posting']  = $modules['frontendposting'];
-            $modules['heic-to-jepeg']  = $modules['heictojepeg'];
-            $modules['media-gallery']  = $modules['mediagallery'];
-            $modules['page-gallery']  = $modules['pagegallery'];
-            $modules['pdf-to-excel']  = $modules['pdftoexcel'];
-            $modules['positional-accounts']  = $modules['positionalaccounts'];
-            $modules['sim-nigeria']  = $modules['simnigeria'];
-            $modules['user-management']  = $modules['usermanagement'];
-            $modules['user-pages']  = $modules['userpages'];
+            if(isset($modules['contentfilter'])){
+                $modules['content-filter']  = $modules['contentfilter'];
+                unset($modules['contentfilter']);
+            }
+            if(isset($modules['defaultpictures'])){
+                $modules['default-pictures']  = $modules['defaultpictures'];
+                unset($modules['defaultpictures']);
+            }
+            if(isset($modules['embedpage'])){
+                $modules['embed-page']  = $modules['embedpage'];
+                unset($modules['embedpage']);
+            }
+            if(isset($modules['fancyemail'])){
+                $modules['html-email']  = $modules['fancyemail'];
+                unset($modules['fancyemail']);
+            }
+            if(isset($modules['frontendposting'])){
+                $modules['frontend-posting']  = $modules['frontendposting'];
+                unset($modules['frontendposting']);
+            }
+            if(isset($modules['heictojepeg'])){
+                $modules['heic-to-jpeg']  = $modules['heictojepeg'];
+                unset($modules['heictojepeg']);
+            }
+            if(isset($modules['mediagallery'])){
+                $modules['media-gallery']  = $modules['mediagallery'];
+                unset($modules['mediagallery']);
+            }
+            if(isset($modules['pagegallery'])){
+                $modules['page-gallery']  = $modules['pagegallery'];
+                unset($modules['pagegallery']);
+            }
+            if(isset($modules['pdftoexcel'])){
+                $modules['pdf-to-excel']  = $modules['pdftoexcel'];
+                unset($modules['pdftoexcel']);
+            }
+            if(isset($modules['positionalaccounts'])){
+                $modules['positional-accounts']  = $modules['positionalaccounts'];
+                unset($modules['positionalaccounts']);
+            }
+            if(isset($modules['simnigeria'])){
+                $modules['sim-nigeria']  = $modules['simnigeria'];
+                unset($modules['simnigeria']);
+            }
+            if(isset($modules['usermanagement'])){
+                $modules['user-management']  = $modules['usermanagement'];
+                unset($modules['usermanagement']);
+            }
+            if(isset($modules['userpages'])){
+                $modules['user-pages']  = $modules['userpages'];
+                unset($modules['userpages']);
+            }
+            
+            if(isset($modules['banking'])){
+                unset($modules['banking']);
+            }
+
+            if(isset($modules['mailposting'])){
+                unset($modules['mailposting']);
+            }
 
             $github = new GITHUB\Github($modules['github']['token'] ?? '');
 
