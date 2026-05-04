@@ -70,7 +70,7 @@ class AfterUpdate extends AfterPluginUpdate {
                 $modules['user-pages']  = $modules['userpages'];
                 unset($modules['userpages']);
             }
-            
+
             if(isset($modules['bulkchange'])){
                 unset($modules['bulkchange']);
             }
@@ -89,6 +89,8 @@ class AfterUpdate extends AfterPluginUpdate {
             }
 
             $github = new GITHUB\Github($modules['github']['token'] ?? '');
+
+            $retryActivate  = [];
 
             foreach($modules as $module => $settings){
                 error_log("Processing $module");
@@ -126,7 +128,34 @@ class AfterUpdate extends AfterPluginUpdate {
 
                 // Activate
                 error_log("Activating $module plugin");
-                activate_plugin("tsjippy-$module/tsjippy-$module.php");
+                $result = activate_plugin("tsjippy-$module/tsjippy-$module.php");
+
+                if(is_wp_error($result)){
+                    TSJIPPY\printArray($result->get_error_message());
+                    $retryActivate[] = $module;
+                }
+            }
+
+            $retryActivate2  = [];
+            foreach($retryActivate as $module){
+                // Activate
+                error_log("Activating $module plugin - Attempt 2");
+                $result = activate_plugin("tsjippy-$module/tsjippy-$module.php");
+
+                if(is_wp_error($result)){
+                    TSJIPPY\printArray($result->get_error_message());
+                    $retryActivate2[] = $module;
+                }
+            }
+
+            foreach($retryActivate2 as $module){
+                // Activate
+                error_log("Activating $module plugin - Attempt 3");
+                $result = activate_plugin("tsjippy-$module/tsjippy-$module.php");
+
+                if(is_wp_error($result)){
+                    TSJIPPY\printArray($result->get_error_message());
+                }
             }
 
             /**
