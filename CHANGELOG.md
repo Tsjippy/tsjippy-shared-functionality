@@ -6,6 +6,7 @@
 ### Changed
 
 ### Fixed
+- remove bulkchange plugin
 
 ### Updated
 
