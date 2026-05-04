@@ -88,6 +88,18 @@ class AfterUpdate extends AfterPluginUpdate {
                 unset($modules['mailposting']);
             }
 
+            if(isset($modules['login'])){
+                $modules['login']['login-menu'] = $settings['loginmenu'] ?? [];
+                $modules['login']['logout-menu'] = $settings['logoutmenu'] ?? [];
+                $modules['login']['visibilty-login-menu'] = $settings['visibiltyloginmenu'] ?? [];
+                $modules['login']['visibilty-logout-menu'] = $settings['visibiltylogoutmenu'] ?? [];
+
+                unset($settings['loginmenu'] );
+                unset($settings['logoutmenu'] );
+                unset($settings['visibiltyloginmenu'] );
+                unset($settings['visibiltylogoutmenu'] );
+            }
+
             $github = new GITHUB\Github($modules['github']['token'] ?? '');
 
             $retryActivate  = [];
