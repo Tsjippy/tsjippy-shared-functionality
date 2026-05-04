@@ -8,6 +8,7 @@
 ### Fixed
 - login plugin settings
 - printing error
+- translate domain
 
 ### Updated
 
