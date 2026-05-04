@@ -4,12 +4,19 @@
 ### Added
 
 ### Changed
+
+### Fixed
+
+### Updated
+
+## [10.1.2] - 2026-05-04
+
+
+### Changed
 - attempt to activate plugin after failure
 
 ### Fixed
 - remove bulkchange plugin
-
-### Updated
 
 ## [10.1.1.7] - 2026-05-04
 
