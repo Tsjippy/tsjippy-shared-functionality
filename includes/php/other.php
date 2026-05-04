@@ -70,7 +70,7 @@ function stagingFirstRun() {
 		 foreach($users as $user){
 			//If this user is not an admin or editor
 			if( !array_intersect($allowedRoles, $user->roles ) ) {
-				TSJIPPY\printArray("Deleting user with id {$user->ID} as this is an staging site");
+				printArray("Deleting user with id {$user->ID} as this is an staging site");
 				//Delete user and assign its contents to the admin user
 				wp_delete_user($user->ID,1);
 			}

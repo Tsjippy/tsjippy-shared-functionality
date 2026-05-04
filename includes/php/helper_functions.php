@@ -1309,10 +1309,13 @@ function addElement($type, $parent='', $attributes=[], $textContent='', $positio
 		$node = $dom->createElement($type, $textContent );
 	} catch (\DOMException $e) {
 		// Catch the specific DOMException
-		TSJIPPY\printArray("Caught DOMException: " . $e->getMessage() . " (Code: " . $e->getCode() . ")");
+		printArray("Caught DOMException: " . $e->getMessage() . " (Code: " . $e->getCode() . ")");
+		return;
 	} catch (\Exception $e) {
 		// Catch any other general exceptions if needed
-		TSJIPPY\printArray( "Caught general Exception: " . $e->getMessage());
+		printArray( "Caught general Exception: " . $e->getMessage());
+
+		return;
 	}
 
 	// Type should come first
@@ -1325,10 +1328,10 @@ function addElement($type, $parent='', $attributes=[], $textContent='', $positio
 			$node->setAttribute($attribute, $value);
 		} catch (\DOMException $e) {
 			// Catch the specific DOMException
-			TSJIPPY\printArray("Caught DOMException for attribute '$attribute' " . $e->getMessage() . " (Code: " . $e->getCode() . ")");
+			printArray("Caught DOMException for attribute '$attribute' " . $e->getMessage() . " (Code: " . $e->getCode() . ")");
 		} catch (\Exception $e) {
 			// Catch any other general exceptions if needed
-			TSJIPPY\printArray( "Caught general Exception: " . $e->getMessage());
+			printArray( "Caught general Exception: " . $e->getMessage());
 		}
 	}
 	
@@ -1345,10 +1348,10 @@ function addElement($type, $parent='', $attributes=[], $textContent='', $positio
 		}
 	} catch (\DOMException $e) {
 		// Catch the specific DOMException
-		TSJIPPY\printArray("Caught DOMException: " . $e->getMessage() . " (Code: " . $e->getCode() . ")");
+		printArray("Caught DOMException: " . $e->getMessage() . " (Code: " . $e->getCode() . ")");
 	} catch (\Exception $e) {
 		// Catch any other general exceptions if needed
-		TSJIPPY\printArray( "Caught general Exception: " . $e->getMessage());
+		printArray( "Caught general Exception: " . $e->getMessage());
 	}
 
 	return $node;

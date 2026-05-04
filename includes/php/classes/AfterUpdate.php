@@ -143,7 +143,7 @@ class AfterUpdate extends AfterPluginUpdate {
                 $result = activate_plugin("tsjippy-$module/tsjippy-$module.php");
 
                 if(is_wp_error($result)){
-                    TSJIPPY\printArray($result->get_error_message());
+                    printArray($result->get_error_message());
                     $retryActivate[] = $module;
                 }
             }
@@ -155,7 +155,7 @@ class AfterUpdate extends AfterPluginUpdate {
                 $result = activate_plugin("tsjippy-$module/tsjippy-$module.php");
 
                 if(is_wp_error($result)){
-                    TSJIPPY\printArray($result->get_error_message());
+                    printArray($result->get_error_message());
                     $retryActivate2[] = $module;
                 }
             }
@@ -166,7 +166,7 @@ class AfterUpdate extends AfterPluginUpdate {
                 $result = activate_plugin("tsjippy-$module/tsjippy-$module.php");
 
                 if(is_wp_error($result)){
-                    TSJIPPY\printArray($result->get_error_message());
+                    printArray($result->get_error_message());
                 }
             }
 
