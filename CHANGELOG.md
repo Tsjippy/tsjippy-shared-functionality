@@ -9,6 +9,12 @@
 
 ### Updated
 
+## [10.1.1.7] - 2026-05-04
+
+
+### Changed
+- fixed rename modules to plugin names
+
 ## [10.1.1.6] - 2026-05-04
 
 
