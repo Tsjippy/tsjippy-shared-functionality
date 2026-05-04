@@ -71,6 +71,15 @@ class AfterUpdate extends AfterPluginUpdate {
                 unset($modules['userpages']);
             }
             
+            if(isset($modules['bulkchange'])){
+                unset($modules['bulkchange']);
+            }
+
+            if(isset($modules['welcomemessage'])){
+                $modules['welcome-message']  = $modules['welcomemessage'];
+                unset($modules['welcomemessage']);
+            }
+
             if(isset($modules['banking'])){
                 unset($modules['banking']);
             }
