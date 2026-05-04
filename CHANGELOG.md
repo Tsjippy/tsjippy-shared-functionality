@@ -6,11 +6,16 @@
 ### Changed
 
 ### Fixed
+
+### Updated
+
+## [10.1.1.8] - 2026-05-04
+
+
+### Fixed
 - login plugin settings
 - printing error
 - translate domain
-
-### Updated
 
 ## [10.1.2] - 2026-05-04
 
