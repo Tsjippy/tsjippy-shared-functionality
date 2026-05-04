@@ -4,6 +4,7 @@
 ### Added
 
 ### Changed
+- attempt to activate plugin after failure
 
 ### Fixed
 - remove bulkchange plugin
