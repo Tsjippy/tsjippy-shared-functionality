@@ -22,7 +22,7 @@ function customDescription( $res, $action, $args ) {
 	}
 
 	$github 	    		= new Github();
-	return $github->pluginData(TSJIPPY\PLUGINPATH, 'Tsjippy', 'tsjippy-shared-functionality', [
+	return $github->pluginData(TSJIPPY\PLUGINPATH, 'Tsjippy', 'shared-functionality', [
 		'active_installs'	=> 2, 
 		'donate_link'		=> 'harmseninnigeria.nl', 
 		'rating'			=> 5, 

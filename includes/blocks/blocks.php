@@ -128,7 +128,7 @@ function displayCategories($attributes) {
 		'taxonomy' 			=> $taxonomy,
 		'current_category'	=> get_queried_object()->term_id,
 		'show_count'		=> $args['count'],
-		'title_li' 			=> '<h4>' . __( 'Categories', 'tsjippy-shared-functionality' ) . '</h4>'
+		'title_li' 			=> '<h4>' . __( 'Categories', 'tsjippy' ) . '</h4>'
 	));
 }
 

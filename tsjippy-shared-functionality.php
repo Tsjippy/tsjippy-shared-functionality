@@ -10,7 +10,7 @@ namespace TSJIPPY;
  * Requires at least:	6.3
  * Requires PHP: 		8.3
  * Tested up to: 		6.9
- * Plugin URI:			https://github.com/Tsjippy/tsjippy-shared-functionality/
+ * Plugin URI:			https://github.com/Tsjippy/shared-functionality/
  * Tested:				6.9	
  * TextDomain:			tsjippy
  * License: GPLv2 or later

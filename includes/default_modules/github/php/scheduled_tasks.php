@@ -37,13 +37,26 @@ function checkForPluginUpdates(){
 		$slug   	= str_replace('tsjippy-', '', basename($plugin, '.php'));
 		$nameSpace	= strtoupper($slug);
 
-		$oldVersion	= constant("TSJIPPY\\$nameSpace\\PLUGINVERSION");
+		if($nameSpace == 'SHARED-FUNCTIONALITY'){
+			$oldVersion	= constant("TSJIPPY\\PLUGINVERSION");
+		}else{
+			$oldVersion	= constant("TSJIPPY\\$nameSpace\\PLUGINVERSION");
+		}
 		
 		$release	= $github->getLatestRelease('Tsjippy', $slug, true);
 
 		if(is_wp_error($release)){
-			TSJIPPY\printArray("Error checking for update for plugin $slug: ");
+			$errorMessage	= $release->get_error_message();
+			TSJIPPY\printArray("Error checking for update for plugin $slug: $errorMessage");
+			TSJIPPY\printArray($errorMessage);
 			TSJIPPY\printArray($release);
+
+			if(
+				$errorMessage == 'You have triggered an abuse detection mechanism. Please wait a few minutes before you try again.' ||
+				str_contains($errorMessage, 'You have reached GitHub hourly limit!')
+			){
+				return;
+			}
 			continue;
 		}
 
@@ -58,7 +71,3 @@ function checkForPluginUpdates(){
         }
 	}
 }
-
-add_action('init', function(){
-	checkForPluginUpdates();
-});

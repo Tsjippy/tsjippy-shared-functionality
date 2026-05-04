@@ -62,31 +62,31 @@ function addCronSchedule( $schedules ) {
 	// Adds once every 15 minutes to the existing schedules.
 	$schedules['quarterly'] = array(
 		'interval'	=> 900,
-		'display' 	=> __( 'Once every 15 minutes', 'tsjippy-shared-functionality')
+		'display' 	=> __( 'Once every 15 minutes', 'tsjippy')
 	);
 
    // Adds once monthly to the existing schedules.
    $schedules['monthly'] = array(
        'interval'	=> 2628000,
-       'display' 	=> __( 'Once every month', 'tsjippy-shared-functionality' )
+       'display' 	=> __( 'Once every month', 'tsjippy' )
    );
    
    // Adds threemonthly to the existing schedules.
    $schedules['threemonthly'] = array(
        'interval' => 7884000,
-       'display' => __( 'Once every 3 months', 'tsjippy-shared-functionality' )
+       'display' => __( 'Once every 3 months', 'tsjippy' )
    );
 
    // Adds sixmonthly to the existing schedules.
    $schedules['sixmonthly'] = array(
 		'interval'	=> 60*60*24*182,
-		'display'	=> __( 'Once every 6 months', 'tsjippy-shared-functionality' )
+		'display'	=> __( 'Once every 6 months', 'tsjippy' )
 	);
 
    // Adds yearly to the existing schedules.
 	$schedules['yearly'] = array(
 		'interval' => 31557600,
-		'display' => __( 'Once every year', 'tsjippy-shared-functionality' )
+		'display' => __( 'Once every year', 'tsjippy' )
 	);
 
 	return $schedules;

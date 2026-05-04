@@ -348,7 +348,7 @@ class Github{
      *
      * @return  object            Version information
      */
-    public function getVersionInfo($path, $author='Tsjippy', $repo='tsjippy-shared-functionality'){
+    public function getVersionInfo($path, $author='Tsjippy', $repo='shared-functionality'){
         $slug       = pathinfo($path, PATHINFO_FILENAME);
         if(str_contains($path, 'themes')){
             $oldVersion = wp_get_theme($slug)->get('Version');
