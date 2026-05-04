@@ -6,6 +6,7 @@
 ### Changed
 
 ### Fixed
+- rename modules on update
 
 ### Updated
 
