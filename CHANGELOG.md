@@ -7,6 +7,7 @@
 
 ### Fixed
 - login plugin settings
+- printing error
 
 ### Updated
 
