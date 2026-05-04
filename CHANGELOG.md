@@ -6,9 +6,14 @@
 ### Changed
 
 ### Fixed
-- rename modules on update
 
 ### Updated
+
+## [10.1.5.2] - 2026-05-04
+
+
+### Fixed
+- rename modules on update
 
 ## [10.1.5.1] - 2026-05-04
 
