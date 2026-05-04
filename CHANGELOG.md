@@ -6,9 +6,14 @@
 ### Changed
 
 ### Fixed
-- login plugin settings
 
 ### Updated
+
+## [10.1.3] - 2026-05-04
+
+
+### Fixed
+- login plugin settings
 
 ## [10.1.2] - 2026-05-04
 
