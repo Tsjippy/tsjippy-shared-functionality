@@ -55,6 +55,8 @@ function mainMenuActions(){
  * @return	bool			true on succes, false on failure
  */
 function updateOrDownloadPlugin($slug){
+	$slug		= str_replace('tsjippy-', '', $slug);
+
 	$github		= new TSJIPPY\GITHUB\Github();
 
 	$result		= $github->downloadFromGithub('Tsjippy', $slug, WP_PLUGIN_DIR.'/tsjippy-'.$slug, true);
@@ -64,6 +66,9 @@ function updateOrDownloadPlugin($slug){
 
 		return false;
 	}elseif($result){
+		// flush the cache so the plugin list updates
+		wp_cache_flush();
+
 		return true;
 	}else{
 		?>

@@ -10,6 +10,7 @@ class MainAdminMenu{
     public $mainDiv;
     public $dom;
     public $settings;
+    public $plugins;
 
     /**
      * Constructor
@@ -37,46 +38,223 @@ class MainAdminMenu{
             }
         );
 
+        $this->plugins  = [];
+        $this->getActivePlugins();
+
+        add_filter("plugin_action_links_".plugin_basename(TSJIPPY\PLUGIN), [$this, 'addExtraPluginLinks'], 10, 3);
+        foreach($this->plugins as $slug => $details){
+            // Add plugin menu links
+            add_filter("plugin_action_links_".plugin_basename($details['plugin']), [$this, 'addExtraPluginLinks'], 10, 3);
+    
+            add_submenu_page(
+                'tsjippy', 
+                $details['name'], 
+                $details['name'], 
+                "edit_others_posts", 
+                'tsjippy-'.$details['slug'], 
+                function() use ( $details){
+                    $this->buildSubMenu($details['name'], $details['slug']);
+                }
+            );
+        }
+    }
+
+    public function getActivePlugins(){
+        if(!empty($this->plugins)){
+            return $this->plugins;
+        }
+
         foreach(wp_get_active_and_valid_plugins() as $plugin){
 
-            // Only add submenu for tsjippy plugins
-            if( strpos($plugin, 'tsjippy-') !== false ){
-
-                // Add plugin menu links
-                add_filter("plugin_action_links_".plugin_basename($plugin), [$this, 'addExtraPluginLinks'], 10, 3);
-
-                // But not for the shared functionality plugin)
-                if(strpos($plugin, 'tsjippy-shared-functionality') !== false){
-                    continue;
-                }
-
-                $menuSLug   = basename($plugin, '.php');
-
-                $slug = str_replace('tsjippy-', '', $menuSLug);
-                $name = ucwords(str_replace('-', ' ', $slug));
-                $slug = str_replace('-', '', $slug);
-    
-                add_submenu_page(
-                    'tsjippy', 
-                    $name, 
-                    $name, 
-                    "edit_others_posts", 
-                    $menuSLug, 
-                    function() use ( $name, $slug ){
-                        $this->buildSubMenu($name, $slug);
-                    }
-                );
+            // Fimd tsjippy plugins
+            if( strpos($plugin, 'tsjippy-') === false || strpos($plugin, 'tsjippy-shared-functionality') !== false){
+                continue;
             }
+
+            $menuSLug   = basename($plugin, '.php');
+
+            $slug = str_replace('tsjippy-', '', $menuSLug);
+            $name = ucwords(str_replace('-', ' ', $slug));
+
+            $this->plugins[$slug] = [
+                'name'  => $name,
+                'slug'  => str_replace('-', '', $slug),
+                'file'  => $plugin
+            ];
         }
     }
     
     public function mainMenu(){
+        if(!empty($_GET['activate']) || !empty($_GET['install'])){
+            if(!empty($_GET['activate'])){
+                $key    = 'activate';
+            }else{
+                $key    = 'install';
+            }
+
+            $slug   = sanitize_text_field($_GET[$key]);
+
+            if(!empty($_GET['install'])){
+                updateOrDownloadPlugin($slug);
+            }
+
+            // Check dependencies
+            $result = validate_plugin_requirements("tsjippy-$slug/tsjippy-$slug.php");
+            if(is_wp_error($result)){
+                if(!empty($result->error_data['plugin_missing_dependencies'])){
+
+                    // Activate plugins
+                    foreach($result->error_data['plugin_missing_dependencies']['inactive'] ?? [] as $depSlug => $pluginName){
+                        activate_plugin("$depSlug/$depSlug.php");
+                    }
+
+                    // Download and activate plugins
+                    foreach($result->error_data['plugin_missing_dependencies']['not_installed'] ?? [] as $depSlug => $pluginName){
+                        if(!updateOrDownloadPlugin($depSlug)){
+                            continue;
+                        }
+                        $result = activate_plugin("$depSlug/$depSlug.php");
+                    }
+                }else{
+                    TSJIPPY\printArray($result);
+                }
+            }
+
+
+            wp_cache_flush();
+
+            $result = activate_plugin("tsjippy-$slug/tsjippy-$slug.php");
+            if(is_wp_error($result)){
+                ?>
+                <div class='error'>
+                    Failed to activate the plugin
+                </div>
+                <?php
+            }else{
+                ?>
+                <div class='success'>
+                    Plugin activated successfully
+                </div>
+                <?php
+            }
+        }
+
+        $plugins = [
+            'bookings',
+            'captcha',
+            'comments',
+            'content-filter',
+            'default-pictures',
+            'embed-page',
+            'events',
+            'html-email',
+            'forms',
+            'frontend-posting',
+            'heic-to-jpeg',
+            'library',
+            'locations',
+            'login',
+            'mailchimp',
+            'maintenance',
+            'mandatory',
+            'media-gallery',
+            'page-gallery',
+            'pdf',
+            'pdf-to-excel',
+            'prayer',
+            'projects',
+            'positional-accounts',
+            'querier',
+            'statistics',
+            'user-management',
+            'user-pages',
+            'welcome-message',
+            'signal',
+            'vimeo',
+        ];
+
+        $inActivePlugins        = array_diff($plugins, array_keys($this->plugins));
+        $notInstalledPlugins    = [];
+        $curUrl                 = remove_query_arg( ['activate', 'install'],);
+
         do_action('tsjippy_plugin_actions');
     
         ?>
         <div class="wrap">
             <h1>Tsjippy Plugin Settings</h1>
-            <p>Welcome to the Tsjippy Plugin Settings page!</p>
+            
+            <h2>Active Plugins</h2>
+            <table class='tsjippy table'>
+                <?php
+                foreach($this->plugins as $slug => $details){
+                    ?>
+                    <tr>
+                        <td>
+                            <?php
+                            echo $details['name'];
+                            ?>
+                        </td>
+                        <td>
+                            <a href='<?php echo admin_url( "admin.php?page=tsjippy-$slug" );?>'>Settings</a>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            </table>
+            
+            <h2>Inactive Plugins</h2>
+            <table class='tsjippy table'>
+                <?php
+                $none = true;
+                foreach($inActivePlugins as $plugin){
+                    if(!is_file(WP_PLUGIN_DIR."/tsjippy-$plugin/tsjippy-$plugin.php")){
+                        $notInstalledPlugins[] = $plugin;
+                        continue;
+                    }
+
+                    $none   = false;
+                    ?>
+                    <tr>
+                        <td>
+                            <?php
+                            echo ucfirst(str_replace('-', ' ', $plugin)) ;
+                            ?>
+                        </td>
+                        <td>
+                            <a href='<?php echo $curUrl;?>&activate=<?php echo $plugin;?>'>Activate</a>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                if($none){
+                    echo "No inactive plugins.";
+                }
+                ?>
+            </table>
+
+            <h2>Available Plugins</h2>
+            <table class='tsjippy table'>
+                <?php
+                foreach($notInstalledPlugins as $plugin){
+                    ?>
+                    <tr>
+                        <td>
+                            <?php
+                            echo ucfirst(str_replace('-', ' ', $plugin)) ;
+                            ?>
+                        </td>
+                        <td>
+                            <a href='<?php echo $curUrl;?>&install=<?php echo $plugin;?>'>Install</a>
+                        </td>
+                    </tr>
+                    <?php
+                }
+                if(empty($notInstalledPlugins)){
+                    echo "No other available plugins.";
+                }
+                ?>
+            </table>
         </div>
         <?php
     }
