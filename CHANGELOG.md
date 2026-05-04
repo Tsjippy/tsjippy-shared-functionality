@@ -4,6 +4,7 @@
 ### Added
 
 ### Changed
+- fixed rename modules to plugin names
 
 ### Fixed
 
