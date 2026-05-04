@@ -18,8 +18,19 @@ class AfterUpdate extends AfterPluginUpdate {
              */
             $modules     = get_option('sim_modules', []);
 
-            // Make sure we use the github token in the new plugin
-            update_option('tsjippy_github_settings', $modules['github']);
+            $modules['content-filter']  = $modules['contentfilter'];
+            $modules['default-pictures']  = $modules['defaultpictures'];
+            $modules['embed-page']  = $modules['embedpage'];
+            $modules['html-email']  = $modules['fancyemail'];
+            $modules['frontend-posting']  = $modules['frontendposting'];
+            $modules['heic-to-jepeg']  = $modules['heictojepeg'];
+            $modules['media-gallery']  = $modules['mediagallery'];
+            $modules['page-gallery']  = $modules['pagegallery'];
+            $modules['pdf-to-excel']  = $modules['pdftoexcel'];
+            $modules['positional-accounts']  = $modules['positionalaccounts'];
+            $modules['sim-nigeria']  = $modules['simnigeria'];
+            $modules['user-management']  = $modules['usermanagement'];
+            $modules['user-pages']  = $modules['userpages'];
 
             $github = new GITHUB\Github($modules['github']['token'] ?? '');
 
@@ -32,7 +43,13 @@ class AfterUpdate extends AfterPluginUpdate {
                     unset($settings['emails']);
                 }
 
-                unset($settings['enable']);
+                if(isset($settings['enable'])){
+                    unset($settings['enable']);
+                } 
+                
+                if(isset($settings['nonce'])){
+                    unset($settings['nonce']);
+                }
                 
                 update_option("tsjippy_{$module}_settings", $settings);
 
