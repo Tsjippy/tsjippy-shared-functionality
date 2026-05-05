@@ -35,7 +35,7 @@ jobs:
         - name: Set Prefix
           id: prefix
           run: |
-            if [ contains( 'tsjippy-', ${{ github.event.repository.name }}) ]; then
+            if [[ ${{ github.event.repository.name }} =~ "tsjippy-" ]]; then
               echo "prefix=" >> "$GITHUB_OUTPUT"
             else
               echo "prefix=tsjippy-" >> "$GITHUB_OUTPUT"
