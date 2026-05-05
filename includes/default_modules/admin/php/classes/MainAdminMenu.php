@@ -44,7 +44,7 @@ class MainAdminMenu{
         add_filter("plugin_action_links_".plugin_basename(TSJIPPY\PLUGIN), [$this, 'addExtraPluginLinks'], 10, 3);
         foreach($this->plugins as $slug => $details){
             // Add plugin menu links
-            add_filter("plugin_action_links_".plugin_basename($details['plugin']), [$this, 'addExtraPluginLinks'], 10, 3);
+            add_filter("plugin_action_links_".plugin_basename($details['file']), [$this, 'addExtraPluginLinks'], 10, 3);
     
             add_submenu_page(
                 'tsjippy', 
@@ -438,7 +438,7 @@ class MainAdminMenu{
     }
 
     //Add setting link to plugin page
-    function addExtraPluginLinks($links, $plugin, $data) {
+    public function addExtraPluginLinks($links, $plugin, $data) {
         //http://plugin-prepare.local/wp-admin/admin.php?page=tsjippy
         //http://plugin-prepare.local/wp-admin/admin.php?page=tsjippy_bookings
         
@@ -453,12 +453,12 @@ class MainAdminMenu{
 
         $url            = admin_url( "admin.php?page=$page" );
         $link           = "<a href='$url'>Settings</a>";
-        array_unshift($links, $link);
+        $links['settings'] = $link;
 
         // Details link
         $url            = admin_url( "plugin-install.php?tab=plugin-information&plugin=$slug&section=changelog" );
         $link           = "<a href='$url'>Details</a>";
-        array_unshift($links, $link);
+        $links['details'] = $link;
 
         //TO DO: implement Pro
         $pro = true;
@@ -487,8 +487,10 @@ class MainAdminMenu{
                 $url   = admin_url( 'plugins.php?update=check' );
                 $link  = "<a href='$url'>Check for update</a>";
             }
-            array_unshift($links, $link);
+            $links['update'] = $link;
         }
+
+        ksort($links);
 
         return $links;
     }
