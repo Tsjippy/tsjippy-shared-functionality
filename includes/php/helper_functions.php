@@ -1298,9 +1298,9 @@ function addElement($type, $parent='', $attributes=[], $textContent='', $positio
 	if(empty($parent)){
 		$dom	= new \DOMDocument();
 		$parent	= $dom;
+	}else{
+		$dom	= $parent->ownerDocument ?? $parent;
 	}
-
-	$dom	= $parent->ownerDocument ?? $parent;
 
 	try {
 		// Text content should not contain <br> tags, replace them with new line characters
