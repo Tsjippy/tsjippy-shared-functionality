@@ -6,9 +6,14 @@
 ### Changed
 
 ### Fixed
-- recurrence selector
 
 ### Updated
+
+## [10.1.6] - 2026-05-05
+
+
+### Fixed
+- recurrence selector
 
 ## [10.1.4] - 2026-05-04
 
