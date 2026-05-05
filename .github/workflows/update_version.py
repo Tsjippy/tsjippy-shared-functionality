@@ -69,10 +69,10 @@ except Exception as e:
 
 print(f'New version is {tag_name}')
 
-print(txt)
-
 # replace with new
 txt = txt.replace(oldVersion, tag_name)
+
+print(txt)
 
 # Write changes
 f = open(file_path, "w")

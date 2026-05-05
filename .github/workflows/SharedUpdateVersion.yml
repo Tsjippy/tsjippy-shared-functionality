@@ -38,18 +38,28 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
               file-path: |
-                {tsjippy-${{ github.event.repository.name }}.php, style.css}
                 CHANGELOG.md
+                tsjippy-${{ github.event.repository.name }}.php
+                style.css
               commit-msg: Update wp plugin version
               github-token: ${{ secrets.GITHUB_TOKEN }}
               
+        - name: Set Prefix
+          id: prefix
+          run: |
+            if [ contains( 'tsjippy-', ${{ github.event.repository.name }} ]; then
+              echo "prefix=" >> "$GITHUB_OUTPUT"
+            else
+              echo "prefix=tsjippy-" >> "$GITHUB_OUTPUT"
+            fi
+
         - name: Zip Folder
-          run: zip -r tsjippy-${{ github.event.repository.name }}.zip . -x ".git/*" ".github/*" "scripts/*" "phpcs.xml" "composer.json" "composer.lock" ".gitignore" "signalbot.db" "SignalBot.py" "CHANGELOG.md" "README.md" "*.code-workspace" "*.cmd" ".vscode" "test.php"
+          run: zip -r ${{ steps.prefix.outputs.prefix }}${{ github.event.repository.name }}.zip . -x ".git/*" ".github/*" "scripts/*" "phpcs.xml" "composer.json" "composer.lock" ".gitignore" "signalbot.db" "SignalBot.py" "CHANGELOG.md" "README.md" "*.code-workspace" "*.cmd" ".vscode" "test.php"
 
         - name: Release
           uses: softprops/action-gh-release@v3
           if: startsWith(github.ref, 'refs/tags/')
           with:
-            files: tsjippy-${{ github.event.repository.name }}.zip
+            files: ${{ steps.prefix.outputs.prefix }}${{ github.event.repository.name }}.zip
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
