@@ -61,7 +61,7 @@ txt = Path(file_path).read_text()
 
 # get old version
 try:
-    oldVersion = re.search(r'\* Version:[ \t]*([\d.]+)', txt).group(1)
+    oldVersion = re.search(r'Version:[ \t]*([\d.]+)', txt).group(1)
 except Exception as e:
     exit()
 
