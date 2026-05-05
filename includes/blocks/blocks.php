@@ -173,7 +173,7 @@ function displayChildren($attributes) {
 	));
 
 	if(!empty($html)){
-		wp_enqueue_script('tsjippy-child-posts', plugins_url('show_children/expand.min.js', __FILE__), array(), STYLE_VERSION, true);
+		wp_enqueue_script('tsjippy-child-posts', plugins_url('show_children/expand.min.js', __FILE__), array(), PLUGINVERSION, true);
 
 		if(!empty($attributes['listtype'])){
 			$html	= str_replace("<li ", "<li style='list-style-type: {$attributes['listtype']}'", $html);
