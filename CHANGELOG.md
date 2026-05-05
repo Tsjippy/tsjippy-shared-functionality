@@ -4,21 +4,14 @@
 ### Added
 
 ### Changed
-
-### Fixed
-
-### Updated
-
-## [10.1.8] - 2026-05-05
-
-
-### Changed
 - github workflow allow theme files
 
 ### Fixed
 - find version without * in front of it
 - enqueu error
 - admin eneue early hook
+
+### Updated
 
 ## [10.1.7] - 2026-05-05
 
