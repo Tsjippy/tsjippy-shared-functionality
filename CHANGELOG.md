@@ -4,6 +4,7 @@
 ### Added
 
 ### Changed
+- github workflow allow theme files
 
 ### Fixed
 
