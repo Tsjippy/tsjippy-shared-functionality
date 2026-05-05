@@ -8,6 +8,7 @@
 
 ### Fixed
 - find version without * in front of it
+- enqueu error
 
 ### Updated
 
