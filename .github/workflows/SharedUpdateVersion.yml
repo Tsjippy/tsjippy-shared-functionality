@@ -32,18 +32,6 @@ jobs:
             PLUGIN: ${{ github.event.repository.name }}
           run: python scripts/.github/workflows/update_version.py
 
-        - name: Commit version update
-          uses: test-room-7/action-update-file@v2
-          env: 
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-              file-path: |
-                CHANGELOG.md
-                tsjippy-${{ github.event.repository.name }}.php
-                style.css
-              commit-msg: Update wp plugin version
-              github-token: ${{ secrets.GITHUB_TOKEN }}
-              
         - name: Set Prefix
           id: prefix
           run: |
@@ -52,6 +40,17 @@ jobs:
             else
               echo "prefix=tsjippy-" >> "$GITHUB_OUTPUT"
             fi
+
+        - name: Commit version update
+          uses: test-room-7/action-update-file@v2
+          env: 
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+              file-path: |
+                CHANGELOG.md
+                {${{ steps.prefix.outputs.prefix }}${{ github.event.repository.name }}.php,style.css}
+              commit-msg: Update wp plugin version
+              github-token: ${{ secrets.GITHUB_TOKEN }}
 
         - name: Zip Folder
           run: zip -r ${{ steps.prefix.outputs.prefix }}${{ github.event.repository.name }}.zip . -x ".git/*" ".github/*" "scripts/*" "phpcs.xml" "composer.json" "composer.lock" ".gitignore" "signalbot.db" "SignalBot.py" "CHANGELOG.md" "README.md" "*.code-workspace" "*.cmd" ".vscode" "test.php"
