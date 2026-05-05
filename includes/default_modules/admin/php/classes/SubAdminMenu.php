@@ -213,13 +213,18 @@ abstract class SubAdminMenu{
         ];
 
         foreach($options as $value => $name){
+            $attributes = [
+                'value'     => $value
+            ];
+
+            if($value == $selectedValue){
+                $attributes['selected'] = 'selected';
+            }
+            
             addElement(
                 'option', 
                 $select, 
-                [
-                    'value'     => $value,
-                    'selected'  => $value == $selectedValue ? 'selected' : ''
-                ],
+                $attributes,
                 $name
             );
         }
