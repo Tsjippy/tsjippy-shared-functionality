@@ -32,13 +32,13 @@ jobs:
             PLUGIN: ${{ github.event.repository.name }}
           run: python scripts/.github/workflows/update_version.py
 
-        - name: Update wp plugin version
+        - name: Commit version update
           uses: test-room-7/action-update-file@v2
           env: 
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
               file-path: |
-                tsjippy-${{ github.event.repository.name }}.php
+                { tsjippy-${{ github.event.repository.name }}.php, style.css }
                 CHANGELOG.md
               commit-msg: Update wp plugin version
               github-token: ${{ secrets.GITHUB_TOKEN }}

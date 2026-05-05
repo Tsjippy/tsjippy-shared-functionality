@@ -49,12 +49,15 @@ if not check_input("PLUGIN"):
     exit(1)
 plugin = os.environ['PLUGIN']
 
-print(plugin)
+if os.path.isfile(f"tsjippy-{plugin}.php"):
+    file_path   = f"tsjippy-{plugin}.php"
+else:
+    file_path   = 'style.css'
 
-print(os.environ['GITHUB_WORKSPACE'])
+print(f"Filepath is {file_path}")
 
 # load plugin file
-txt = Path('tsjippy-' + plugin + '.php').read_text()
+txt = Path(file_path).read_text()
 
 # get old version
 try:
@@ -66,7 +69,7 @@ except Exception as e:
 txt = txt.replace(oldVersion, tag_name)
 
 # Write changes
-f = open('tsjippy-' + plugin + '.php', "w")
+f = open(file_path, "w")
 f.write(txt)
 f.close()
 
