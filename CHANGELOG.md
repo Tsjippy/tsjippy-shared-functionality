@@ -6,6 +6,7 @@
 ### Changed
 
 ### Fixed
+- recurrence selector
 
 ### Updated
 
