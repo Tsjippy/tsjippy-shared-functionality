@@ -6,10 +6,15 @@
 ### Changed
 
 ### Fixed
-- plugin menu
-- add elment when empty parent
 
 ### Updated
+
+## [10.1.7] - 2026-05-05
+
+
+### Fixed
+- plugin menu
+- add elment when empty parent
 
 ## [10.1.6] - 2026-05-05
 
