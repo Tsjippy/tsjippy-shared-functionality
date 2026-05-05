@@ -7,6 +7,7 @@
 - github workflow allow theme files
 
 ### Fixed
+- find version without * in front of it
 
 ### Updated
 
