@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 //Add js and css files
 add_action( 'wp_enqueue_scripts', __NAMESPACE__.'\enqueueScripts', 1);
-add_action( 'admin_enqueue_scripts', __NAMESPACE__.'\registerScripts');
+add_action( 'admin_enqueue_scripts', __NAMESPACE__.'\registerScripts', 1);
 
 // Style the buttons in the media library
 add_action( 'wp_enqueue_media', __NAMESPACE__.'\enqueuMediaStyle');
