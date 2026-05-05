@@ -62,8 +62,14 @@ txt = Path(file_path).read_text()
 # get old version
 try:
     oldVersion = re.search(r'Version:[ \t]*([\d.]+)', txt).group(1)
+
+    print(f'Old version is {oldVersion}')
 except Exception as e:
     exit()
+
+print(f'New version is {tag_name}')
+
+print(txt)
 
 # replace with new
 txt = txt.replace(oldVersion, tag_name)
