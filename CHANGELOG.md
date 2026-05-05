@@ -7,6 +7,7 @@
 
 ### Fixed
 - plugin menu
+- add elment when empty parent
 
 ### Updated
 
