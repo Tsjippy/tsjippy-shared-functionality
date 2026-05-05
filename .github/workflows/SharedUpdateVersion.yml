@@ -35,7 +35,7 @@ jobs:
         - name: Set Prefix
           id: prefix
           run: |
-            if [ contains( 'tsjippy-', ${{ github.event.repository.name }} ]; then
+            if [ contains( 'tsjippy-', ${{ github.event.repository.name }}) ]; then
               echo "prefix=" >> "$GITHUB_OUTPUT"
             else
               echo "prefix=tsjippy-" >> "$GITHUB_OUTPUT"
@@ -46,6 +46,7 @@ jobs:
           env: 
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
+              allow-removing: true
               file-path: |
                 CHANGELOG.md
                 {${{ steps.prefix.outputs.prefix }}${{ github.event.repository.name }}.php,style.css}
