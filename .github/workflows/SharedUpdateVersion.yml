@@ -55,9 +55,6 @@ jobs:
 
         - name: WP Release
           run: zip -r ${{ steps.prefix.outputs.prefix }}${{ github.event.repository.name }}.zip . -x ".git/*" ".github/*" "scripts/*" "phpcs.xml" "composer.json" "composer.lock" ".gitignore" "signalbot.db" "SignalBot.py" "CHANGELOG.md" "README.md" "*.code-workspace" "*.cmd" ".vscode" "test.php"
-        
-        - name: DEV Release
-          run: zip -r dev-${{ steps.prefix.outputs.prefix }}${{ github.event.repository.name }}.zip . -x "scripts/*"
 
         - name: Release
           uses: softprops/action-gh-release@v3
@@ -65,6 +62,5 @@ jobs:
           with:
             files: | 
               ${{ steps.prefix.outputs.prefix }}${{ github.event.repository.name }}.zip
-              dev-${{ steps.prefix.outputs.prefix }}${{ github.event.repository.name }}.zip
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -51,7 +51,7 @@ class MainAdminMenu{
                 $details['name'], 
                 $details['name'], 
                 "edit_others_posts", 
-                'tsjippy-'.$details['slug'], 
+                'tsjippy-'.$slug, 
                 function() use ( $details){
                     $this->buildSubMenu($details['name'], $details['slug']);
                 }
