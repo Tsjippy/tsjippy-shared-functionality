@@ -4,6 +4,7 @@
 ### Added
 
 ### Changed
+- keep - in  slug
 
 ### Fixed
 
