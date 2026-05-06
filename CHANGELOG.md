@@ -9,6 +9,7 @@
 ### Fixed
 - drop table first before renaming to it
 - workflow bug
+- tsjippy.table css
 
 ### Updated
 
