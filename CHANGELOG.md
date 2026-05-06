@@ -5,6 +5,7 @@
 - dev-zip release
 
 ### Changed
+- use name
 
 ### Fixed
 - drop table first before renaming to it
