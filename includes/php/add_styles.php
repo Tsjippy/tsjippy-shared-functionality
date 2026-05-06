@@ -14,13 +14,6 @@ function enqueuMediaStyle(){
 }
 
 function registerScripts($hook=''){
-	global $runned;
-
-	if($runned){
-		return;
-	}
-
-	$runned	= true;
 	if(!is_user_logged_in()){
 		wp_enqueue_script('tsjippy_nonce_script', plugins_url('js/nonce.min.js', __DIR__), [], PLUGINVERSION, false);
 		wp_localize_script( 'tsjippy_nonce_script',
