@@ -4,6 +4,15 @@
 ### Added
 
 ### Changed
+
+### Fixed
+
+### Updated
+
+## [10.1.9] - 2026-05-06
+
+
+### Changed
 - github workflow allow theme files
 
 ### Fixed
@@ -11,8 +20,6 @@
 - enqueu error
 - admin eneue early hook
 - do not store empty block filters
-
-### Updated
 
 ## [10.1.7] - 2026-05-05
 
