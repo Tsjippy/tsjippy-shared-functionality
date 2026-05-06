@@ -7,7 +7,6 @@
 - keep - in  slug
 
 ### Fixed
-- js dependicies error
 
 ### Updated
 
