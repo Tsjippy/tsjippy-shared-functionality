@@ -229,8 +229,8 @@ export function setTableLabel() {
 		//Get all heading elements
 		let tdLabels = [];
 		table.querySelectorAll('thead th').forEach((el,index) => {
-			if(el.dataset.niceName != null){
-				tdLabels[index]	= el.dataset.niceName;
+			if(el.dataset.name != null){
+				tdLabels[index]	= el.dataset.name;
 			}else{
 				tdLabels[index]	= el.textContent;
 			}
