@@ -9,6 +9,7 @@
 ### Fixed
 - find version without * in front of it
 - enqueu error
+- admin eneue early hook
 
 ### Updated
 
