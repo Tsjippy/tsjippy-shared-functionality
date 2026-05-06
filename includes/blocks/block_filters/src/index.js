@@ -9,6 +9,8 @@ import { useSelect } from '@wordpress/data';
 import { store as coreDataStore } from '@wordpress/core-data';
 import { decodeEntities } from '@wordpress/html-entities';	
 
+console.log('block filter loaded');
+
 // Add attributes
 function addFilterAttribute(settings) {
     if (typeof settings.attributes !== 'undefined') {
@@ -53,18 +55,18 @@ const blockFilterControls = createHigherOrderComponent((BlockEdit) => {
             );
         }
 
-        if(attributes.onlyOn == undefined){
-            attributes.onlyOn = [];
-        }
-
         /** FUNCTIONS */
         const [ searchTerm, setSearchTerm ]     = useState( '' );
 
         // Selected page list
         const { initialSelectedPages, selectedPagesResolved} = useSelect(
             ( select) => {
+                let onlyOn  = []
+                if(attributes.onlyOn != undefined){
+                    onlyOn  = attributes.onlyOn;
+                }
                 // Find all selected pages
-                const selectedPagesArgs = [ 'postType', 'page', {include : attributes.onlyOn} ];
+                const selectedPagesArgs = [ 'postType', 'page', {include : onlyOn} ];
 
                 return {
                     initialSelectedPages: select( coreDataStore ).getEntityRecords(
@@ -90,9 +92,14 @@ const blockFilterControls = createHigherOrderComponent((BlockEdit) => {
                     }
                 }
 
+                let onlyOn  = []
+                if(attributes.onlyOn != undefined){
+                    onlyOn  = attributes.onlyOn;
+                }
+
                 // find all pages excluding the already selected pages
                 const query = {
-                    exclude : attributes.onlyOn,
+                    exclude : onlyOn,
                     search  : searchTerm,
                     per_page: 100,
                     orderby : 'relevance'
@@ -115,21 +122,37 @@ const blockFilterControls = createHigherOrderComponent((BlockEdit) => {
 
         const PageSelected = function(checked){
             if(checked){
+                let onlyOn  = []
+                if(attributes.onlyOn != undefined){
+                    onlyOn  = attributes.onlyOn;
+                }
                 // Add to stored page ids
-                setAttributes({onlyOn: [...attributes.onlyOn, this]});
+                setAttributes({onlyOn: [...onlyOn, this]});
 
                 // Add to selected pages list
                 setSelectedPages([...selectedPages, pages.find( p => p.id == this)]);
             }else{
-                setAttributes({onlyOn: attributes.onlyOn.filter( p => {return p != this} )});
+                let onlyOn  = []
+                if(attributes.onlyOn != undefined){
+                    onlyOn  = attributes.onlyOn;
+                }
+                onlyOn  = onlyOn.filter( p => {return p != this} );
+
+                if(onlyOn.length > 0){
+                    setAttributes({onlyOn: onlyOn});
+                }
             }
         }
 
         const GetSelectedPagesControls = function(){
-            if(attributes.onlyOn.length > 0){
+            let onlyOn  = []
+            if(attributes.onlyOn != undefined){
+                onlyOn  = attributes.onlyOn;
+            }
+            if(onlyOn.length > 0){
                 return (
                     <>
-                        <i> {__('Currently selected pages', 'sim')}:</i>
+                        <i> {__('Currently selected pages', 'tsjippy')}:</i>
                         <br></br>
                         
                         <BuildCheckboxControls hasResolved={ selectedPagesResolved } items={initialSelectedPages} showNoResults={false}/>
@@ -162,11 +185,15 @@ const blockFilterControls = createHigherOrderComponent((BlockEdit) => {
             }
             
             return items?.map( ( page ) => {
+                let onlyOn  = []
+                if(attributes.onlyOn != undefined){
+                    onlyOn  = attributes.onlyOn;
+                }
             
                 return (<CheckboxControl
                     label		= {decodeEntities( page.title.rendered )}
                     onChange	= {PageSelected.bind(page.id)}
-                    checked		= {attributes.onlyOn.includes(page.id)}
+                    checked		= {onlyOn.includes(page.id)}
                 />)
             } )
         }
@@ -174,20 +201,27 @@ const blockFilterControls = createHigherOrderComponent((BlockEdit) => {
         const onPhpFiltersChanged	= function(newValue){
             let oldValue    = this;
 
-            let newFilters  = [...attributes.phpFilters];
+            let phpFilters  = []
+            if(attributes.phpFilters != undefined){
+                phpFilters  = attributes.phpFilters;
+            }
+
+            let newFilters  = [...phpFilters];
             // add a new value
-            if(oldValue == '' && !attributes.phpFilters.includes(newValue)){
+            if(oldValue == '' && !phpFilters.includes(newValue)){
                 newFilters.push(newValue);
             // value removed
             }else if(newValue == ''){
-                newFilters   = attributes.phpFilters.filter(el => el != oldValue);
+                newFilters   = phpFilters.filter(el => el != oldValue);
             // value changed
             }else{
-                let index   = attributes.phpFilters.findIndex(el => el == oldValue);
+                let index   = phpFilters.findIndex(el => el == oldValue);
                 newFilters[index]  = newValue;
             }
     
-            setAttributes({ phpFilters: newFilters });
+            if(newFilters.length > 0){
+                setAttributes({ phpFilters: newFilters });
+            }
 
             setPhpFilter('');
     
@@ -208,8 +242,6 @@ const blockFilterControls = createHigherOrderComponent((BlockEdit) => {
         let phpFilterControls   = '';
         if(attributes.phpFilters != undefined){
             phpFilterControls   = createFilterControls(attributes.phpFilters);
-        }else{
-            attributes.phpFilters   = [];
         }
 
         /** HOOKS */
@@ -267,12 +299,12 @@ const blockFilterControls = createHigherOrderComponent((BlockEdit) => {
 
                         {pageFilters}
 
-                        <strong>{__('Select pages', 'sim')}</strong><br></br>
-                        {__('Select pages you want this widget to show on', 'sim')}.<br></br>
-                        {__('Leave empty for all pages', 'sim')}<br></br>
+                        <strong>{__('Select pages', 'tsjippy')}</strong><br></br>
+                        {__('Select pages you want this widget to show on', 'tsjippy')}.<br></br>
+                        {__('Leave empty for all pages', 'tsjippy')}<br></br>
                         <br></br>
                         {selectedPagesControls}
-                        <i>{__('Use searchbox below to search for more pages to include', 'sim')}</i>
+                        <i>{__('Use searchbox below to search for more pages to include', 'tsjippy')}</i>
                         < SearchControl onChange={ setSearchTerm } value={ searchTerm } />
                         < BuildCheckboxControls hasResolved= {pagesResolved} items= {pages} />
 	                </PanelBody>
