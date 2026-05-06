@@ -177,6 +177,11 @@ class AfterUpdate extends AfterPluginUpdate {
             
             foreach($tables as $table){
                 $newName    = str_replace('_sim_', '_tsjippy_', $table);
+
+                // remove a potential one first
+                $wpdb->query("DROP TABLE `$newName`;");
+
+                // Rename sim tables to tsjippy tables
                 $wpdb->query("ALTER TABLE $table RENAME TO $newName");
             }
 
