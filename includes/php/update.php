@@ -21,7 +21,7 @@ add_action( 'schedule_tsjippy_plugin_update_action', function($slug, $oldVersion
     if(class_exists($className)){
         $afterUpdate            = new $className();
         $afterUpdate->afterPluginUpdate( $oldVersion );
-    }else{
+    }elseif(wp_get_environment_type() == 'local'){
         printArray("Update: class $className does not exist");
     }
 }, 10, 2 );

@@ -63,7 +63,7 @@ jobs:
           uses: softprops/action-gh-release@v3
           if: startsWith(github.ref, 'refs/tags/')
           with:
-            files: 
+            files: | 
               ${{ steps.prefix.outputs.prefix }}${{ github.event.repository.name }}.zip
               dev-${{ steps.prefix.outputs.prefix }}${{ github.event.repository.name }}.zip
           env:
