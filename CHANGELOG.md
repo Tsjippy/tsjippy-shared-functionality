@@ -10,6 +10,7 @@
 - find version without * in front of it
 - enqueu error
 - admin eneue early hook
+- do not store empty block filters
 
 ### Updated
 
