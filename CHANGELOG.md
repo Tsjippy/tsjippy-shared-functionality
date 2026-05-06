@@ -4,11 +4,16 @@
 ### Added
 
 ### Changed
-- keep - in  slug
 
 ### Fixed
 
 ### Updated
+
+## [10.2.1] - 2026-05-06
+
+
+### Changed
+- keep - in  slug
 
 ## [10.2.0] - 2026-05-06
 
