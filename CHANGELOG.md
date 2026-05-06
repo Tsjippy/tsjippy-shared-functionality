@@ -6,6 +6,7 @@
 ### Changed
 
 ### Fixed
+- drop table first before renaming to it
 
 ### Updated
 
