@@ -2,6 +2,17 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
+
+### Changed
+
+### Fixed
+
+### Updated
+
+## [10.2.0] - 2026-05-06
+
+
+### Added
 - dev-zip release
 
 ### Changed
@@ -11,8 +22,6 @@
 - drop table first before renaming to it
 - workflow bug
 - tsjippy.table css
-
-### Updated
 
 ## [10.1.9] - 2026-05-06
 
